@@ -24,7 +24,7 @@ public class ConnectionManager {
 	public static Connection getConnection()
 	{
 		try{
-			FileInputStream fis=new FileInputStream("E:\\EclipseWork\\ReadingWork\\src\\com\\jdbc\\pros\\DB_Config.properties");
+			FileInputStream fis=new FileInputStream("E:\\E-Commerce\\ShoppingCart\\src\\com\\mivim\\connection\\DB_Config.properties");
 			Properties p=new Properties();
 			p.load(fis);
 			driverClass=p.getProperty("driverClass");
