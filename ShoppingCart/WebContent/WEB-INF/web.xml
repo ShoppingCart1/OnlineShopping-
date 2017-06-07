@@ -19,4 +19,14 @@
     <servlet-name>Sample</servlet-name>
     <url-pattern>/Sample</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ItemUpdateServlet</display-name>
+    <servlet-name>ItemUpdateServlet</servlet-name>
+    <servlet-class>com.mivim.controller.item_update.ItemUpdateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ItemUpdateServlet</servlet-name>
+    <url-pattern>/ItemUpdateServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
