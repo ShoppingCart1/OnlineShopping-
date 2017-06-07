@@ -50,6 +50,7 @@ public class ItemUpdateServlet extends HttpServlet {
 		 * Here create object for AdminDTO class
 		 */
 		AdminDTO dto=new AdminDTO();
+	
 		dto.setItem_id(item_id);
 		dto.setItem_name(item_name);
 		dto.setUnit_price(unit_price);
@@ -64,6 +65,8 @@ public class ItemUpdateServlet extends HttpServlet {
 		 * DTO object send to services
 		 */
 		boolean flag=UpdateService.getUpdateservice(dto);
+		
+		
 		
 		
 	}
