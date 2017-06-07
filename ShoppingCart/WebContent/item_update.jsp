@@ -5,12 +5,16 @@
     <%
     	String query="select id,category_name,parent_id from category";
     	Connection connection=null;
-    	Statement statement=null;
-    	ResultSet resultSet = null;
+    	Statement statement1=null;
+    	Statement statement2=null;
+    	ResultSet resultSet1 = null;
+    	ResultSet resultSet2 = null;
     	
     	connection=ConnectionManager.getConnection();
-    	statement=connection.createStatement();
-    	resultSet=statement.executeQuery(query);
+    	statement1=connection.createStatement();
+    	statement2=connection.createStatement();
+    	resultSet1=statement1.executeQuery(query);
+    	resultSet2=statement2.executeQuery(query);
     
     %>
     
@@ -20,8 +24,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>item update page</title>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 </head>
-<body>
+<body ng-app="">
 		<label style="color:blue">Item Update Form</label><br><br><br>
 		<form action="" method="post">
 			
@@ -34,11 +39,32 @@
 			
 				
 			%>
-			<label style="color:blue">Select Category:</label><select name="category_id">
-  				<option value="Electronics">Electronics</option>
+			<label style="color:blue">Select Category:</label><select name="category_id" ng-model="selected_category_id">
+			<%while(resultSet2.next())
+				{
+					String category_name=resultSet2.getString("category_name");
+					String category_id=resultSet2.getString("id");
+					String parent_id=resultSet2.getString("parent_id");
+					if(parent_id.equals("0"))
+					{
+				%>
+  				<option value="<%=category_id%>"><%=category_name %></option>
+  				<%}} 
+  				%>
 			</select><br><br>
 			<label style="color:blue">Select Sub Category:</label><select name="sub_category_id">
-  				<option value="Mobiles">Mobiles</option>
+			<%while(resultSet1.next()){
+				String sub_category_name=resultSet1.getString("category_name");
+				String sub_category_id=resultSet1.getString("id");
+				String parent_id=resultSet1.getString("parent_id");
+				%><%String parent_category_id="";%>{{selected_category_id}}
+				
+				<%
+				if(!(parent_id.equals("0")))
+				{
+				%>
+  				<option value="<%=sub_category_id%>"><%=sub_category_name %></option>
+  				<%} }%>
 			</select><br><br>
 			<label style="color:blue">Select Image</label><input type="file" name="image_path"><br><br>
 			<input type="submit" value="update">
