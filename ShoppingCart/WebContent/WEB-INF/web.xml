@@ -29,4 +29,12 @@
     <servlet-name>ItemUpdateServlet</servlet-name>
     <url-pattern>/ItemUpdateServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <servlet-name>AddItemServlet</servlet-name>
+    <servlet-class>com.mivim.controller.AddItemServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddItemServlet</servlet-name>
+    <url-pattern>/AddItemServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
