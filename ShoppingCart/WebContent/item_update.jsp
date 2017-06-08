@@ -1,7 +1,8 @@
+<%@page import="com.mivim.dto.CategoriesDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ page import="java.sql.Connection,java.sql.Statement,java.sql.ResultSet,java.util.List" %>
-   <%@ page import="com.mivim.connection.ConnectionManager,com.mivim.dto.AdminDTO,com.mivim.dao.UtilDAO" %>
+   <%@ page import="java.util.List" %>
+   <%@ page import="com.mivim.dao.UtilDAO" %>
     <%--  <jsp:include page="utilServlet"/>   --%>
     <%
 
@@ -15,9 +16,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>item update page</title>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
-<body ng-app="">
+<body>
 		<label style="color:blue">Item Update Form</label><br><br><br>
 		<form action="" method="post">
 			
@@ -30,18 +31,18 @@
 			
 				
 			%>
-			<label style="color:blue">Select Category:</label><select name="category_id" onchange='getSubCategry(this)'>
-			
-			<%List<AdminDTO> list=UtilDAO.getElements();
-				for(AdminDTO categories:list)
+			<label style="color:blue">Select Category:</label><select name="category_id" id="categories">
+				<option selected disabled>SelectCategory</option>
+			<%List<CategoriesDto> list=UtilDAO.getElements();
+				for(CategoriesDto categories:list)
 				{
 			%>
-  				<option value="<%=categories.getCategory_id() %>"><%=categories.getCategory_name() %></option>
+  				<option value="<%=categories.getId()%>" ><%=categories.getCategoryName() %></option>
   				<%} %>
 			</select><br><br>
-			<label style="color:blue">Select Sub Category:</label><select name="sub_category_id">
+			<label style="color:blue">Select Sub Category:</label><select name="sub_category_id" id="sub_categories">
 			
-  				<option value=""></option>
+  				<option selected disabled>SelectSubCategory</option>
   				
 			</select><br><br>
 			<label style="color:blue">Select Image</label><input type="file" name="image_path"><br><br>
@@ -51,15 +52,35 @@
 		
 		</form>
 		
-		<script type="text/javascript">
-		
-		function getSubCategry(selectedItem){
-			
-			
-		}
 		
 		
-		</script>
+		<script>
+			$(document).ready(function() {
+
+				$('#categories').change(function(event) {
+       			 var categories = $("select#categories").val();
+      			  $.get('UtilServlet', {
+                category_id : categories
+       			 }, function(response) {
+    		    var select = $('#sub_categories');
+       			 select.find('option').remove();
+        		  $.each(response, function(index, value) {
+       			   $('<option>').val(value.id).text(value.categoryName).appendTo(select);
+   				   }, function(error){
+   				   });
+   			     });
+   		     });
+			});
+</script>
+<!-- 	<script>
+$(document).ready(function(){
+    $("select").change(function(){
+        $.ajax({url: "UtilSer", success: function(result){
+            $("#div1").html(result);
+        }});
+    });
+});
+</script> -->
 		
 </body>
 </html>

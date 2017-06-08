@@ -1,17 +1,18 @@
 package com.mivim.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 import com.mivim.dto.AdminDTO;
+import com.mivim.dto.CategoriesDto;
 import com.mivim.services.UtilService;
 
 /**
@@ -34,27 +35,36 @@ public class UtilServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//String category_id=request.getParameter("category_id");
+		String category_id=request.getParameter("category_id");
 		
-		PrintWriter pw=response.getWriter();
+		//PrintWriter pw=response.getWriter();
 		
-		String category_id="0";
+		//String category_id="0";
 		
-		AdminDTO dto=new AdminDTO();
+		CategoriesDto dto=new CategoriesDto();
 		
-		dto.setCategory_id(category_id);
+		dto.setId(category_id);
 		
 		
 		try {
 			
-			List<AdminDTO> list=UtilService.getCategeries(dto);
-			
-			/*for(AdminDTO dt:list)
+			List<CategoriesDto> listDto=UtilService.getCategeries(dto);
+            String json = null;
+            List<String> list=new ArrayList<String>();
+			/*for(AdminDTO dt:listDto)
 			{
-				pw.println(dt.getCategory_id()+" "+dt.getCategory_name()+"  "+dt.getParent_id()+"\n");
-			}*/
+				list.add(dt.getCategory_name());
+			}	
+
 			
-			request.setAttribute("categeries", list);
+			System.out.println(list);
+*/			response.setContentType("application/json");
+             new Gson().toJson(listDto,response.getWriter());
+            
+           /* response.getWriter().write(json);
+            request.setAttribute("categeries", listDto);*/
+		
+		//	request.setAttribute("categeries", list);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

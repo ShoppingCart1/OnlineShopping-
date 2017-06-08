@@ -1,68 +1,84 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<%@ page import="java.util.*" %>  
-<%@ page import="java.time.*" %>
-<%@ page import="java.sql.*" %>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+   <%@ page import="java.util.List" %>
+   <%@ page import="com.mivim.dto.CategoriesDto,com.mivim.dao.UtilDAO" %>
+    <%--  <jsp:include page="utilServlet"/>   --%>
+    <%
+
+    	/* List<AdminDTO> list=(List<AdminDTO>)request.getAttribute("categeries"); */
+    
+    %>
+  
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Add Item Page</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-<%
-Class.forName("com.mysql.jdbc.Driver");
-//Connection con=DriverManager.getConnection("jdbc:mysql://localhost/ecommerce");
+		<label style="color:blue">AddItemForm</label><br><br><br>
+		<form action="" method="post">
+			
+	<label style="color:blue">ItemID:</label><input tpye="text" name="itemId"><br><br>
+		<label style="color:blue">ItemName:</label><input type="text" name="itemName"><br><br>
+			<label style="color:blue">Item Price:</label><input type="text" name="unitPrice"><br><br>
+			<label style="color:blue">Inventory:</label><input type="number" name="inventory"><br><br>
+			<label style="color:blue">Item_Description:</label><textarea rows="4" cols="50" name="itemDescription">
+			</textarea><br><br>
+			<label style="color:blue">StausCode:</label><input type="number" name="statusCode"><br><br>
+			<%
+			
+				
+			%>
+			<label style="color:blue">Select Category:</label><select name="categoryId" id="categories">
+				<option selected disabled>SelectCategory</option>
+			<%List<CategoriesDto> list=UtilDAO.getElements();
+				for(CategoriesDto categories:list)
+				{
+			%>
+  				<option value="<%=categories.getId()%>" ><%=categories.getCategoryName() %></option>
+  				<%} %>
+			</select><br><br>
+			<label style="color:blue">Select Sub Category:</label><select name="subCategoryId" id="subCategories">
+			
+  				<option selected disabled>SelectSubCategory</option>
+  				
+			</select><br><br>
+			<label style="color:blue">Select Image</label><input type="file" name="image_path"><br><br>
+			<input type="submit" value="update">
+	
+		</form>
+	
+		<script>
+			$(document).ready(function() {
 
-%>
-
-<h1>Add New Product Details</h1>
-<form method="post" action="AddItemServlet">
-<label for="item_id">Item ID</label>
-<input type="text" name="item_id"><br><br>
-<label for="item_name">Item Name</label>
-<input type="text" name="item_name"><br><br>
-<label for="unit_price">Item Price</label>
-<input type="text" name="unit_price"><br><br>
-<label for="file">Select an Image file to upload:</label>
-<br> <br>
-<input type = "file" name = "file" size = "50" />
-<br> <br>
-<label for="inventory">Inventory</label>
-<input type="text" name="inventory"><br><br>
-<label for="item_description">Item Description</label>
-<input type="text" name="item_description"><br><br>
-<label for="status">Status</label>
-<input type="text" name="status"><br><br>
-<label for="category">Category</label>
-
-<select name="category">
-  <option value="none">Please Select the category</option>
-  <option value="mobileaccessories">Mobile Accessories</option>
-  <option value="laptops">Laptops</option>
-  <option value="desktoppcs">DesktopPcs</option>
-  <option value="tablets">Tablets</option>
-  <option value="television">Television</option>
-  <option value="computeraccessories">Computer Accessories</option>
-  <option value="camera">camera</option>
-  <option value="footwear">FootWear</option>
-  <option value="sportwear">SportWear</option>
-  <option value="watches">watches</option>
-  <option value="topwear">TopWear</option>
-  <option value="footwear">FootWear</option>
-  <option value="cloths">Cloths</option>
-  <option value="sportwear">SportWear</option>
-  <option value="watches">watches</option>
-  <option value="furniture">Furniture</option>
-  <option value="dining&serving">Dining & Serving</option>
-  <option value="kitchenstorage">Kitchen Storage</option>
-  <option value="lighting">Lighting</option>
-  <option value="homedecor">Home Decor</option>
-</select>
-<br><br>
-<input type="submit" value="Submit">
-<input type="reset" value="Clear"><br><br>
-</form>
+				$('#categories').change(function(event) {
+       			 var categories = $("select#categories").val();
+      			  $.get('UtilServlet', {
+                category_id : categories
+       			 }, function(response) {
+    		    var select = $('#subCategories');
+       			 select.find('option').remove();
+        		  $.each(response, function(index, value) {
+       			   $('<option>').val(value.id).text(value.categoryName).appendTo(select);
+   				   }, function(error){
+   				   });
+   			     });
+   		     });
+			});
+</script>
+<!-- 	<script>
+$(document).ready(function(){
+    $("select").change(function(){
+        $.ajax({url: "UtilSer", success: function(result){
+            $("#div1").html(result);
+        }});
+    });
+});
+</script> -->
+		
 </body>
 </html>

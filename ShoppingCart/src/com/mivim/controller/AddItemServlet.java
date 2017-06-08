@@ -9,12 +9,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mivim.dto.AdminDTO;
-import com.mivim.services.*;
+import com.mivim.services.AddItemServices;
 public class AddItemServlet extends HttpServlet {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException{
-		
 		response.setContentType("text/html");
 		PrintWriter out=response.getWriter();
 		String item_id = request.getParameter("item_id");
@@ -23,38 +26,29 @@ public class AddItemServlet extends HttpServlet {
 		String inventory = request.getParameter("inventory");
 		String item_description = request.getParameter("item_description");
 		String status = request.getParameter("status");
-		String imgfilePath = request.getParameter("file");
-		String category_name = request.getParameter("category");
-		String subCategory_Id = request.getParameter("subcategory");
-
-		AdminDTO admindto = new AdminDTO();
-		admindto.setItem_id(item_id);
-		admindto.setItem_name(item_name);
-		admindto.setUnit_price(unit_price);
-		admindto.setInventory(inventory);
-		admindto.setItem_description(item_description);
-		admindto.setStatus(status);
-		admindto.setImage_path(imgfilePath);
-		admindto.setCategory_name(category_name);
-		admindto.setSub_category(subCategory_Id);
+		String filePath = request.getParameter("file");
+		String dropDown = request.getParameter("category");
 		
-		
+		String[] paramList=new String[8];
+		paramList[0]=item_id;
+		paramList[1]=item_name;
+		paramList[2]=unit_price;
+		paramList[3]=inventory;
+		paramList[4]=item_description;
+		paramList[5]=status;
+		paramList[6]=filePath;
+		paramList[7]=dropDown;
 		
 		
 		try {
-			AddItemServices.addServices(admindto);
-			out.println("The Item added successfully..");
-
+			AddItemServices.paramList(paramList);
 		} catch (SQLException e) {
-//			RequestDispatcher rd=request.getRequestDispatcher("AddItem.jsp");
-//			out.println("The item with the item id is already added in database.");
-//			rd.include(request, response);
-			e.printStackTrace();
+			RequestDispatcher rd=request.getRequestDispatcher("AddItem.jsp");
+			out.println("The item with the item id is already added in database.");
+			rd.include(request, response);
 		}
 		
 	}
-	
-	
 	
 
 }

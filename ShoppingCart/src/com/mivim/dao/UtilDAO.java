@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.mivim.connection.ConnectionManager;
 import com.mivim.dto.AdminDTO;
+import com.mivim.dto.CategoriesDto;
 
 public class UtilDAO {
 	
@@ -21,9 +22,9 @@ public class UtilDAO {
 	private static ResultSet resultSet=null;
 	
 
-	public static List<AdminDTO> getCategeries(Integer categeoryId) throws SQLException {
+	public static List<CategoriesDto> getCategeries(Integer categeoryId) throws SQLException {
 		
-		List<AdminDTO> adminDTOs = new ArrayList<>();
+		List<CategoriesDto> adminDTOs = new ArrayList<>();
 		//String category_id=dto.getCategory_id();
 		connection=ConnectionManager.getConnection();
 		preparedStatement=connection.prepareStatement(query);
@@ -31,12 +32,13 @@ public class UtilDAO {
 		resultSet=preparedStatement.executeQuery();
 		while(resultSet.next())
 		{
-			AdminDTO adminDTO = new AdminDTO();
+			CategoriesDto adminDTO = new CategoriesDto();
 			String id = resultSet.getString(1);
 			String category_name=resultSet.getString(2);
 			String parent_id=resultSet.getString(3);
-			adminDTO.setCategory_id(id);
-			adminDTO.setCategory_name(category_name);
+			adminDTO.setId(id);
+			adminDTO.setCategoryName(category_name);
+			adminDTO.setParentId(parent_id);
 			//adminDTO.setParent_id(parent_id);
 			adminDTOs.add(adminDTO);
 			//System.out.println(adminDTOs);
@@ -45,21 +47,21 @@ public class UtilDAO {
 		return adminDTOs;
 	}
 	
-	public static List<AdminDTO> getElements() throws SQLException
+	public static List<CategoriesDto> getElements() throws SQLException
 	{
-		List<AdminDTO> adminDTOs = new ArrayList<>();
+		List<CategoriesDto> adminDTOs = new ArrayList<>();
 	
 		connection=ConnectionManager.getConnection();
 		statement=connection.createStatement();		
 		resultSet=statement.executeQuery(query1);
 		while(resultSet.next())
 		{
-			AdminDTO adminDTO = new AdminDTO();
+			CategoriesDto adminDTO = new CategoriesDto();
 			String id = resultSet.getString(1);
 			String category_name=resultSet.getString(2);
 			//String parent_id=resultSet.getString(3);
-			adminDTO.setCategory_id(id);
-			adminDTO.setCategory_name(category_name);
+			adminDTO.setId(id);
+			adminDTO.setCategoryName(category_name);
 			//adminDTO.setParent_id(parent_id);
 			adminDTOs.add(adminDTO);
 			//System.out.println(adminDTOs);
