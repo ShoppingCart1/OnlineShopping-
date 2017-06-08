@@ -19,8 +19,14 @@ public class AdminDTO implements Serializable{
 	private String category_id=null;
 	private String category_name=null;
 	private String sub_category_id=null;
-	private String parent_id=null;
-	private String user_id=null;
+	private String Status=null;
+
+	public String getStatus() {
+		return Status;
+	}
+	public void setStatus(String status) {
+		this.Status = status;
+	}
 	private File image=null;
 	private FileInputStream image_stream=null;
 	
@@ -97,24 +103,8 @@ public class AdminDTO implements Serializable{
 	public void setSub_category(String sub_category_id) {
 		this.sub_category_id = sub_category_id;
 	}
-	public String getSub_category_id() {
-		return sub_category_id;
-	}
-	public void setSub_category_id(String sub_category_id) {
-		this.sub_category_id = sub_category_id;
-	}
-	public String getUser_id() {
-		return user_id;
-	}
-	public void setUser_id(String user_id) {
-		this.user_id = user_id;
-	}
-	public String getParent_id() {
-		return parent_id;
-	}
-	public void setParent_id(String parent_id) {
-		this.parent_id = parent_id;
-	}
+	
+	
 	
 
 }

@@ -11,31 +11,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mivim.connection.ConnectionManager;
+import com.mivim.dto.AdminDTO;
 
 public class AddItemDB {
 	static Connection con = null;
-	static String item_id, item_name, unit_price, inventory, item_description, status, filePath, dropDownname;
+	static String item_id, item_name, unit_price, inventory, item_description, status, filePath, categoryname, categoryid, subcategory;
 
-	public static void executeQuery(String[] paramList) throws IOException, SQLException{	
-		
-		item_id = paramList[0];
-		item_name = paramList[1];
-		unit_price = paramList[2];
-		inventory = paramList[3];
-		item_description = paramList[4];
-		status = paramList[5];
-		filePath = paramList[6];
-		dropDownname = paramList[7];
+	public static void executeQuery(AdminDTO admindto) throws IOException, SQLException{	
+
+
+		item_id = admindto.getItem_id();
+		item_name = admindto.getItem_name();
+		unit_price = admindto.getUnit_price();
+		inventory = admindto.getInventory();
+		item_description = admindto.getItem_description();
+		status = admindto.getStatus();
+		filePath = admindto.getImage_path();
+		categoryid = admindto.getCategory_id();
+		categoryname = admindto.getCategory_name();
+		subcategory = admindto.getSub_category();
  
 		String sqlAddProduct="insert into item (item_id, item_name, unit_price, item_image, inventary, item_description, status) values(?,?,?,?,?,?,?)";
 		String sqlRetCategory="select id, parent_cat_id from category where category_name=?";
 		
 		executeAddProduct(sqlAddProduct); //To add products in Item table
 		executeRetrieve(sqlRetCategory); //To retrieve the id and parent_cat_id from category table
-		
 	}
+	
 	public static void executeAddProduct(String sqlAddProduct) throws FileNotFoundException, SQLException {
-		System.out.println(dropDownname);
+		
+		System.out.println(categoryname);
 		File file=new File(filePath);
 		InputStream is=new FileInputStream (file);
 		con = ConnectionManager.getConnection();
@@ -64,7 +69,7 @@ public class AddItemDB {
 		System.out.println(ps1);
 		System.out.println(con);
 
-		ps1.setString(1, dropDownname);	
+		ps1.setString(1, categoryname);	
 		System.out.println("Test3");
 
 		ResultSet rs=ps1.executeQuery();
@@ -100,4 +105,7 @@ public class AddItemDB {
 		
 		System.out.println("Successfully updated in itemcategory table..");
 	}
+	
+	
+	
 }
