@@ -3,8 +3,10 @@ package com.mivim.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
 
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,20 +20,23 @@ import com.mivim.services.UpdateServiceImpl;
 public class ItemUpdateServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("test");
+	
 		
-		System.out.println("Test");
+		ServletContext context=getServletContext();
+		PrintWriter out =response.getWriter();	
+		
 		String operation = request.getParameter("operation");
-		String item_id=request.getParameter("item_id");
-		String item_name=request.getParameter("item_name");
-		String unit_price=request.getParameter("unit_price");
-		String image_path=request.getParameter("image_path");
+		String item_id=request.getParameter("itemId");
+		String item_name=request.getParameter("itemName");
+		String unit_price=request.getParameter("unitPrice");
+		String image_path=request.getParameter("imagePath");
 		String inventory=request.getParameter("inventory");
-		String item_description=request.getParameter("item_description");
-		String category_id=request.getParameter("category_id");
-		String sub_category_id=request.getParameter("sub_category_id");
-		String status = request.getParameter("status");
+		String item_description=request.getParameter("itemDescription");
+		String category_id=request.getParameter("categoryId");
+		String sub_category_id=request.getParameter("subCategoryId");
+		String statusCode = request.getParameter("statusCode");
 //		
+		context.log(image_path);
 //		System.out.println(operation+" "+item_id+""+""+item_name+""+unit_price+""+inventory+""+item_description+""+category_id+""+sub_category_id+""+status+"");
 //		/*
 //		 * Image Converted to stream
@@ -43,9 +48,10 @@ public class ItemUpdateServlet extends HttpServlet {
 //		 * 
 //		 */
 		File image = new File(image_path);
+		context.log(image.getAbsolutePath());
 		AdminDTO dto=new AdminDTO();
 		
-		dto.setStatus(status);
+		dto.setStatus(statusCode);
 		dto.setOperation(operation);
 		dto.setItem_id(item_id);
 		dto.setItem_name(item_name);
@@ -62,6 +68,17 @@ public class ItemUpdateServlet extends HttpServlet {
 		 */
 		try {
 			boolean flag=UpdateServiceImpl.getUpdateservice(dto);
+			
+			if(flag)
+			{
+				out.print("success");
+			}
+			else
+			{
+				out.println("fail");
+			}
+			
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

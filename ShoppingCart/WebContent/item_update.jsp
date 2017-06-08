@@ -1,8 +1,8 @@
 <%@page import="com.mivim.dto.CategoriesDto"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-   <%@ page import="java.util.List" %>
-   <%@ page import="com.mivim.dao.UtilDAO" %>
+   <%@ page import="java.sql.Connection,java.sql.Statement,java.sql.ResultSet,java.util.List" %>
+   <%@ page import="com.mivim.connection.ConnectionManager,com.mivim.dto.AdminDTO,com.mivim.dao.UtilDAO" %>
     <%--  <jsp:include page="utilServlet"/>   --%>
     <%
 
@@ -47,13 +47,9 @@
 			</select><br><br>
 			<label style="color:blue">Select Image</label><input type="file" name="image_path"><br><br>
 			<input type="submit" value="update">
-			
-								
-		
+	
 		</form>
-		
-		
-		
+
 		<script>
 			$(document).ready(function() {
 
@@ -72,15 +68,6 @@
    		     });
 			});
 </script>
-<!-- 	<script>
-$(document).ready(function(){
-    $("select").change(function(){
-        $.ajax({url: "UtilSer", success: function(result){
-            $("#div1").html(result);
-        }});
-    });
-});
-</script> -->
-		
+
 </body>
 </html>
