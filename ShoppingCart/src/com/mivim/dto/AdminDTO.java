@@ -20,7 +20,14 @@ public class AdminDTO implements Serializable{
 	private String category_name=null;
 	private String sub_category_id=null;
 	private String Status=null;
+	private String operation=null;
 
+	public String getOperation() {
+		return operation;
+	}
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
 	public String getStatus() {
 		return Status;
 	}
