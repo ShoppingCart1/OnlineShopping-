@@ -7,108 +7,35 @@ import java.io.Serializable;
 public class AdminDTO implements Serializable{
 	
 	
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	/*
 	 * All references Initialization here
 	 */
-	private String itemId=null;
-	private String itemName=null;
-	private String unitPrice=null;
-	private String imagePath=null;
+	private String item_id=null;
+	private String item_name=null;
+	private String unit_price=null;
+	private String image_path=null;
 	private String inventory=null;
-	private String itemDescription=null;
-	private String categoryId=null;
-	private String categoryName=null;
-	private String subCategoryId=null;
-	private String parentId=null;
+	private String item_description=null;
+	private String category_id=null;
+	private String category_name=null;
+	private String sub_category_id=null;
+	private String Status=null;
+	private String operation=null;
+
+	public String getOperation() {
+		return operation;
+	}
+	public void setOperation(String operation) {
+		this.operation = operation;
+	}
+	public String getStatus() {
+		return Status;
+	}
+	public void setStatus(String status) {
+		this.Status = status;
+	}
 	private File image=null;
-	private FileInputStream imageStream=null;
-	private String statusCode=null;
-	
-	public String getStatusCode() {
-		return statusCode;
-	}
-	public void setStatusCode(String statusCode) {
-		this.statusCode = statusCode;
-	}
-	public String getItemId() {
-		return itemId;
-	}
-	public void setItemId(String itemId) {
-		this.itemId = itemId;
-	}
-	public String getItemName() {
-		return itemName;
-	}
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
-	}
-	public String getUnitPrice() {
-		return unitPrice;
-	}
-	public void setUnitPrice(String unitPrice) {
-		this.unitPrice = unitPrice;
-	}
-	public String getImagePath() {
-		return imagePath;
-	}
-	public void setImagePath(String imagePath) {
-		this.imagePath = imagePath;
-	}
-	public String getInventory() {
-		return inventory;
-	}
-	public void setInventory(String inventory) {
-		this.inventory = inventory;
-	}
-	public String getItemDescription() {
-		return itemDescription;
-	}
-	public void setItemDescription(String itemDescription) {
-		this.itemDescription = itemDescription;
-	}
-	public String getCategoryId() {
-		return categoryId;
-	}
-	public void setCategoryId(String categoryId) {
-		this.categoryId = categoryId;
-	}
-	public String getCategoryName() {
-		return categoryName;
-	}
-	public void setCategoryName(String categoryName) {
-		this.categoryName = categoryName;
-	}
-	public String getSubCategoryId() {
-		return subCategoryId;
-	}
-	public void setSubCategoryId(String subCategoryId) {
-		this.subCategoryId = subCategoryId;
-	}
-	public String getParentId() {
-		return parentId;
-	}
-	public void setParentId(String parentId) {
-		this.parentId = parentId;
-	}
-	public File getImage() {
-		return image;
-	}
-	public void setImage(File image) {
-		this.image = image;
-	}
-	public FileInputStream getImageStream() {
-		return imageStream;
-	}
-	public void setImageStream(FileInputStream imageStream) {
-		this.imageStream = imageStream;
-	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
+	private FileInputStream image_stream=null;
 	
 	
 	
@@ -116,6 +43,74 @@ public class AdminDTO implements Serializable{
 	 * 
 	 * These are setters and getters in AdminDTO Class
 	 */
+	public String getItem_id() {
+		return item_id;
+	}
+	public void setItem_id(String item_id) {
+		this.item_id = item_id;
+	}
+	public String getItem_name() {
+		return item_name;
+	}
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
+	}
+	public String getUnit_price() {
+		return unit_price;
+	}
+	public void setUnit_price(String unit_price) {
+		this.unit_price = unit_price;
+	}
+	public String getImage_path() {
+		return image_path;
+	}
+	public void setImage_path(String image_path) {
+		this.image_path = image_path;
+	}
+	public String getInventory() {
+		return inventory;
+	}
+	public void setInventory(String inventory) {
+		this.inventory = inventory;
+	}
+	public String getCategory_id() {
+		return category_id;
+	}
+	public void setCategory_id(String category_id) {
+		this.category_id = category_id;
+	}
+	public String getCategory_name() {
+		return category_name;
+	}
+	public void setCategory_name(String category_name) {
+		this.category_name = category_name;
+	}
+
+	public String getItem_description() {
+		return item_description;
+	}
+	public void setItem_description(String item_description) {
+		this.item_description = item_description;
+	}
+	public File getImage() {
+		return image;
+	}
+	public void setImage(File image) {
+		this.image = image;
+	}
+	public FileInputStream getImage_stream() {
+		return image_stream;
+	}
+	public void setImage_stream(FileInputStream image_stream) {
+		this.image_stream = image_stream;
+	}
+	public String getSub_category() {
+		return sub_category_id;
+	}
+	public void setSub_category(String sub_category_id) {
+		this.sub_category_id = sub_category_id;
+	}
+	
 	
 	
 
