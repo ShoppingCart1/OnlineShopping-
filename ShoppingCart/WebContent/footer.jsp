@@ -13,7 +13,7 @@
 <title></title>
 </head>
 <body>
-<div class="text-center">
+<div class="text-center" style="padding-top: 400px;">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center" style="padding-top:30px;">
                         <li>
