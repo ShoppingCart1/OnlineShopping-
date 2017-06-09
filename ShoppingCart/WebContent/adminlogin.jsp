@@ -4,17 +4,17 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>admin_Login</title>
+  <title>Admin_Login</title>
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
   
-    <link rel="stylesheet" type="text/css" href="login.css"> 
+    <link rel="stylesheet" type="text/css" href="adminlogin.css"> 
 </head>
 
 <body>
  
  <div class="login-form">
   <form action="LoginServlet" method="post">
-     <h1>Login To Your Account</h1>
+     <h1>Admin Login</h1>
    <!--    <h4 style="color: red"><%=request.getAttribute("errormessage") %></h4> -->
      
    <div class="form-group">
@@ -25,9 +25,9 @@
      <input type="password" class="form-control" placeholder="Password" name="password">
      <i class="fa fa-lock"></i>
   </div>
- 
+
      <span class="alert">Invalid Credentials</span>
-     <a class="link" href="#">Lost your Password</a>
+     <a class="link" href="#">Forgot Password</a>
      <input type="submit" value="Log in" class="log-btn"> 
      </form>
     <!--    <h3><%= request.getAttribute("errormessage") %></h3> -->
