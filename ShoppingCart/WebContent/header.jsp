@@ -28,15 +28,15 @@
     </sql:query>
 <!-- Setting the header content -->
   <nav class="navbar navbar-default navbar-fixed-top opaque-navbar">
-  <div class="container-fluid">
+  <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span> 
-         <span class="icon-bar"></span> 
+        <span class="icon-bar"></span> 
       </button>
-      <a class="navbar-brand" href=""><img src="logo-design.png" alt="" width="80" height="30">
+      <a class="navbar-brand" href=""><img src="logo-design.png" alt="" width="40" height="30">
       </a>
       <a class="navbar-brand" href="Home.jsp">Online Shopping</a>
     </div>
@@ -69,7 +69,6 @@
           </ul>
         </li>
         </c:forEach>
-        <li><a href="#"><span class="glyphicon glyphicon-search"></span></a></li>
       </ul>
     </div>
     </div>
