@@ -19,6 +19,11 @@ import com.mivim.services.UpdateServiceImpl;
 
 public class ItemUpdateServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
 		
@@ -26,29 +31,34 @@ public class ItemUpdateServlet extends HttpServlet {
 		PrintWriter out =response.getWriter();	
 		
 		String operation = request.getParameter("operation");
-		String item_id=request.getParameter("itemId");
+		String item_id = request.getParameter("itemId");
 		String item_name=request.getParameter("itemName");
 		String unit_price=request.getParameter("unitPrice");
-		String image_path=request.getParameter("imagePath");
-		String inventory=request.getParameter("inventory");
+		
+		//String image_path=request.getParameter("imagePath");
+		
+		String inventary=request.getParameter("inventary");
 		String item_description=request.getParameter("itemDescription");
 		String category_id=request.getParameter("categoryId");
 		String sub_category_id=request.getParameter("subCategoryId");
 		String statusCode = request.getParameter("statusCode");
 //		
-		context.log(image_path);
+		
+		
+		System.out.println(item_id);
+		//context.log(image_path);
 //		System.out.println(operation+" "+item_id+""+""+item_name+""+unit_price+""+inventory+""+item_description+""+category_id+""+sub_category_id+""+status+"");
 //		/*
 //		 * Image Converted to stream
 //		 */
-		FileInputStream image_stream= new FileInputStream(image_path);
+		//FileInputStream image_stream= new FileInputStream(image_path);
 		//System.out.println(image+" "+image_stream);
 //		/*
 //		 * Here create object for AdminDTO class
 //		 * 
 //		 */
-		File image = new File(image_path);
-		context.log(image.getAbsolutePath());
+		//File image = new File(image_path);
+		//context.log(image.getAbsolutePath());
 		AdminDTO dto=new AdminDTO();
 		
 		dto.setStatus(statusCode);
@@ -56,9 +66,9 @@ public class ItemUpdateServlet extends HttpServlet {
 		dto.setItem_id(item_id);
 		dto.setItem_name(item_name);
 		dto.setUnit_price(unit_price);
-		dto.setImage(image);
-		dto.setImage_stream(image_stream);
-		dto.setInventory(inventory);
+		//dto.setImage(image);
+		//dto.setImage_stream(image_stream);
+		dto.setInventory(inventary);
 		dto.setItem_description(item_description);
 		dto.setCategory_id(category_id);
 		dto.setSub_category(sub_category_id);

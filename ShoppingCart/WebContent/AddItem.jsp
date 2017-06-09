@@ -1,4 +1,3 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List"%>
@@ -16,31 +15,31 @@
 <title>Add Item Page</title>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	
+	<link rel="stylesheet" type="text/css" href="adminForm.css">
 </head>
 <body>
-	<label style="color: blue">AddItemForm</label>
-	<br>
-	<br>
-	<br>
+	<div class="form-style">
+	<fieldset>
+	<legend>Add Item Page</legend>
 	<form action="ItemUpdateServlet" method="post">
 
-		<label style="color: blue">ItemID:</label><input tpye="text"
-			name="itemId" required><br>
-		<br> <label style="color: blue">ItemName:</label><input
-			type="text" name="itemName" required><br>
-		<br> <label style="color: blue">Item Price:</label><input
-			type="text" name="unitPrice" required><br>
-		<br> <label style="color: blue">Inventory:</label><input
-			type="text" name="inventory"><br>
-		<br> <label style="color: blue">Item_Description:</label>
-		<textarea rows="4" cols="50" name="itemDescription">
-			</textarea>
+		
+		 <input
+			type="text" name="itemName" required placeholder="Item Name *"><br>
+		<input
+			type="text" name="unitPrice" required placeholder="Item Price *"><br>
+		<input
+			type="text" name="inventary" required placeholder="Inventary *"><br>
+
+			<textarea name="itemDescription" placeholder="About Item with Description"></textarea>
 		<br>
 		<br> <input type="hidden" name="statusCode" value="1">
+		<input type="hidden" name="operation" value="AddItem">
 		<%
 			
 		%>
-		<label style="color: blue">Select Category:</label><select
+		<label style="color: blue">Category:</label><select
 			name="categoryId" id="categories">
 			<option selected disabled>SelectCategory</option>
 			<%
@@ -52,20 +51,21 @@
 				}
 			%>
 		</select><br>
-		<br> <label style="color: blue">Select Sub Category:</label><select
+		<br> <label style="color: blue">SubCategory:</label><select
 			name="subCategoryId" id="subCategories">
 
 			<option selected disabled>SelectSubCategory</option>
 
 		</select><br>
-		<br> <label style="color: blue">Select Image</label><input
+		<br> <!-- <label style="color: blue">Select Image</label><input
 			type="file" /><br>
 			<input type="hidden" id="imagePath" name="imagePath">
 		<br> <input type="hidden" name="operation" value="Additem">
-		<input type="submit" value="update">
+ -->		<input type="submit" value="update">
 
 	</form>
-
+</fieldset>
+</div>
 	<script>
 		$(document).ready(
 				function() {
@@ -90,7 +90,7 @@
 				});
 	</script>
 	
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function(){
     	$('input[type="file"]').change(function(e){
             var fileName = e.target.files[0].name;
@@ -100,6 +100,6 @@
             
         });
     });
-</script>
+</script> -->
 </body>
 </html>

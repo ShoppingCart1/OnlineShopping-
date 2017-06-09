@@ -39,7 +39,7 @@ public class UtilDAO {
 			adminDTO.setId(id);
 			adminDTO.setCategoryName(category_name);
 			adminDTO.setParentId(parent_id);
-			//adminDTO.setParent_id(parent_id);
+			
 			adminDTOs.add(adminDTO);
 			//System.out.println(adminDTOs);
 		}

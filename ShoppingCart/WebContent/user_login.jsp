@@ -13,7 +13,7 @@
 <body>
  
  <div class="login-form">
-  <form action="LoginServlet" method="post">
+  <form action="UserLoginController" method="post">
      <h1>Login To Your Account</h1>
    <!--    <h4 style="color: red"><%=request.getAttribute("errormessage") %></h4> -->
      
@@ -25,7 +25,6 @@
      <input type="password" class="form-control" placeholder="Password" name="password">
      <i class="fa fa-lock"></i>
   </div>
- 
      <span class="alert">Invalid Credentials</span>
      <a class="link" href="#">Lost your Password</a>
      <input type="submit" value="Log in" class="log-btn"> 

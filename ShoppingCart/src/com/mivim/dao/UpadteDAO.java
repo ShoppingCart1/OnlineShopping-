@@ -1,21 +1,19 @@
 package com.mivim.dao;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.UUID;
 
 import com.mivim.connection.ConnectionManager;
 import com.mivim.dto.AdminDTO;
 
 public class UpadteDAO {
 
-	private static String query = "UPDATE item i,item_category ic set " + "i.item_name=?," + "i.unit_price=?,"
-			+ "i.item_image=?," + "i.inventory=?," + "i.item_description=?," + "ic.id=?," + "ic.sub_category=?"
-			+ "where i.item_id=?" + " and ic.item_id=?";
+	private static String queryUpdate = "{call itemUpdateProcedure(?,?,?,?,?,?,?)}";
 
-	private static String queryInsert = "insert into item (item_id, item_name, unit_price, item_image, inventary, item_description, status) values (?,?,?,?,?,?,?)";
+	private static String queryInsert = "insert into item (item_id,item_name, unit_price, inventary, item_description, status) values (?,?,?,?,?,?)";
 	private static String queryInsertItemCategory = "insert into item_category (item_id, id, sub_category_id) values (?,?,?)";
 
 	static String operation;
@@ -28,11 +26,9 @@ public class UpadteDAO {
 	static String sub_category_id;
 	static String statusCode;
 
-	static FileInputStream image_stream;
-	static File image;
-
 	private static Connection connection = null;
 	private static PreparedStatement preparedStatement = null;
+	private static CallableStatement callableStatement=null;
 
 	/*
 	 * This is method for Database Operation
@@ -43,11 +39,9 @@ public class UpadteDAO {
 		 * Getting updated values uing dto obj
 		 */
 		operation = dto.getOperation();
-		item_id = dto.getItem_id();
+		item_id=dto.getItem_id();
 		item_name = dto.getItem_name();
 		unit_price = dto.getUnit_price();
-		image = dto.getImage();
-		image_stream = dto.getImage_stream();
 		inventory = dto.getInventory();
 		item_description = dto.getItem_description();
 		category_id = dto.getCategory_id();
@@ -69,7 +63,7 @@ public class UpadteDAO {
 		int result1 = 0;
 		int result2 = 0;
 
-		if (operation.equals("Additem")) {
+		if (operation.equals("AddItem")) {
 
 			result1=addNewItem();
 			result2=additemCategory();
@@ -77,40 +71,37 @@ public class UpadteDAO {
 				result=1;
 
 		} else {
-			updateItem();
+			result=updateItem();
 		}
 
 		return result;
 	}
 
 	private static int updateItem() throws SQLException {
-		preparedStatement = connection.prepareStatement(query);
-
-		preparedStatement.setString(1, item_name);
-		preparedStatement.setString(2, unit_price);
-		preparedStatement.setBinaryStream(3, image_stream, (int) image.length());
-		preparedStatement.setString(4, inventory);
-		preparedStatement.setString(5, item_description);
-		preparedStatement.setString(6, category_id);
-		preparedStatement.setString(7, sub_category_id);
-		preparedStatement.setString(8, item_id);
-		preparedStatement.setString(9, item_id);
-
-		int result = preparedStatement.executeUpdate();
+		
+		callableStatement=connection.prepareCall(queryUpdate);
+		callableStatement.setString(1, item_id);
+		callableStatement.setString(2, item_name);
+		callableStatement.setString(3, unit_price);
+		callableStatement.setString(4, inventory);
+		callableStatement.setString(5, item_description);
+		callableStatement.setString(6, category_id);
+		callableStatement.setString(7, sub_category_id);
+		int result = callableStatement.executeUpdate();
+		System.out.println(result);
 		return result;
 	}
 
 	public static int addNewItem() throws SQLException {
 		preparedStatement = connection.prepareStatement(queryInsert);
 		System.out.println(item_id);
-		preparedStatement.setString(1, item_id);
+		preparedStatement.setString(1, generateUUuid());
 		preparedStatement.setString(2, item_name);
 		preparedStatement.setString(3, unit_price);
-		preparedStatement.setBinaryStream(4, image_stream, (int) image.length());
-		preparedStatement.setString(5, inventory);
-		preparedStatement.setString(6, item_description);
-		preparedStatement.setString(7, statusCode);
-
+		preparedStatement.setString(4, inventory);
+		preparedStatement.setString(5, item_description);
+		preparedStatement.setString(6, statusCode);
+	
 		int result = preparedStatement.executeUpdate();
 		return result;
 	}
@@ -121,11 +112,13 @@ public class UpadteDAO {
 		preparedStatement.setString(1, item_id);
 		preparedStatement.setString(2, category_id);
 		preparedStatement.setString(3, sub_category_id);
-		
-		
-
 		int result = preparedStatement.executeUpdate();
 		return result;
+	}
+	
+	public static String generateUUuid() {
+		String uuid = UUID.randomUUID().toString();
+		return uuid;
 	}
 
 }

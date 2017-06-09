@@ -9,40 +9,37 @@ import java.sql.Statement;
 import com.mivim.connection.ConnectionManager;
 
 public class UserLoginDao {
-   static Connection con;
-   
-   public static String getUserId(String userName, String passWord) throws SQLException{
-	   
+	static Connection con;
+   public static boolean loginCheck(String userName, String passWord) throws SQLException{
 	   con = ConnectionManager.getConnection();
-	   String sqlgetUserId = "Select user_id from user where user_name=? and password=?";
-	   String userid = null;
-	   PreparedStatement pstmt= con.prepareStatement(sqlgetUserId);
+	   String sqlLogin = "Select * from user where user_name=? and password=?";
+	   PreparedStatement pstmt= con.prepareStatement(sqlLogin);
 	   pstmt.setString(1, userName);
 	   pstmt.setString(2, passWord);
 	   ResultSet rs = pstmt.executeQuery();
-	   
 	   while(rs.next()){
-
-		    userid = rs.getString(1);
+		   String usrName = rs.getString(2);
+		   String pasWord = rs.getString(3);
+		   if((usrName.equals(userName))&&(pasWord.equals(passWord))){
+			   return true;
+		   }
 	   }
 	   
-	   return userid;
-   }
-   
-   public static String getRoleId(String userId) throws SQLException{
+	   //...................both are working........................
 	   
-	   con = ConnectionManager.getConnection();
-	   String sqlgetRoleId = "Select role_id from userrole where user_id=?";
-	   String roleid = null;
-	   PreparedStatement pstmt= con.prepareStatement(sqlgetRoleId);
-	   pstmt.setString(1, userId);
-	   ResultSet rs = pstmt.executeQuery();
+//	   String sqlLogin = "Select * from user_login";
+//
+//	   Statement stmt=con.createStatement();
+//	   ResultSet rs = stmt.executeQuery(sqlLogin);
+//	   while(rs.next()){
+//		   String usrNamedb = rs.getString(1);
+//		   String pasWorddb = rs.getString(2);
+//		   if((usrNamedb.equals(userName))&&(pasWorddb.equals(passWord))){
+//			   return true;
+//		   }
+//	   }
 	   
-	   while(rs.next()){
-
-		    roleid = rs.getString(2);
-	   }
+	   return false;
 	   
-	   return roleid;	   
    }
 }
