@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import com.mivim.dto.AdminDTO;
 import com.mivim.controller.ShoppingCart;
+import com.mivim.services.*;
 
 public class DispatcherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -35,7 +36,67 @@ public class DispatcherServlet extends HttpServlet {
 			return;
 		}
 	
-	}
+	
+	
+	
+
+		// If user request to add products
+		// to shopping cart
+		if (userPath.equals("/AddItem")) {
+
+			// Request the Session
+			HttpSession hs = request.getSession();
+			ShoppingCart cart = (ShoppingCart) hs.getAttribute("cart");
+
+			// Checks whether cart is available
+			// If not, then will create a cart object
+			if (cart == null) {
+				cart = new ShoppingCart();
+				hs.setAttribute("cart", cart);
+			}
+
+			int prodID = Integer.parseInt((hs.getAttribute("id")
+					.toString()));
+			Integer productID = new Integer(prodID);
+			// Check whether the product id is not null
+			// If not null then add the product to the cart
+
+			//if (productID != null) {
+				//ProductService service = new ProductService();
+				//Product p = service.getProductDetails(productID);
+
+				//cart.add(productID, p);
+				//response.sendRedirect("product.jsp");
+
+			//}
+		}
+		// If user wants to remove an item from cart
+		 if (userPath.equals("/remove")) {
+			int pid = Integer.parseInt(request.getParameter("pid"));
+			ShoppingCart cart = (ShoppingCart) hs.getAttribute("cart");
+
+			if (cart != null) {
+				cart.remove(pid);
+				response.sendRedirect("cart.jsp");
+			}
+		}
+		 //product.jsp page
+		 if (userPath.equals("/product")) {
+				int productId = Integer.parseInt(request.getParameter("productId"));
+				ProductService productService = new ProductService();
+				Product product = (Product) productService
+						.getProductDetails(productId);
+				hs = request.getSession();
+				hs.setAttribute("product", product);
+				hs.setAttribute("productID", productId);
+				// Set Product Category and SubCategory in the Context Attribute
+				//getServletContext().setAttribute("productCategory",
+						//product.getCategory());
+				//getServletContext().setAttribute("productSubCategory",
+						//product.getSubCategory());
+			}
+}
+
 	
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
@@ -139,4 +200,6 @@ public class DispatcherServlet extends HttpServlet {
 		}
 
 	}
+
 }
+

@@ -1,11 +1,12 @@
 package com.mivim.controller;
 import com.mivim.dto.AdminDTO;
+import com.mivim.controller.Product;
 public class ShoppingCartItem {
-	private AdminDTO admindto;
+	private Product product;
 	private int quantity;
 	
-	public ShoppingCartItem(AdminDTO p) {
-		admindto = p;
+	public ShoppingCartItem(Product p) {
+		product = p;
 		quantity = 1;
 	}
 	// Method to increase the quantity
@@ -24,12 +25,12 @@ public class ShoppingCartItem {
 		 * Beginning of Getters and Setters
 		 */
 
-		public AdminDTO getAdminDTO() {
-			return admindto;
+		public Product getProduct() {
+			return product;
 		}
 
-		public void setAdminDTO(AdminDTO admindto) {
-			this.admindto = admindto;
+		public void setProduct(Product product) {
+			this.product = product;
 		}
 
 		public int getQuantity() {
@@ -47,8 +48,7 @@ public class ShoppingCartItem {
 
 		public double getTotal() {
 			double amount = 0;
-			double y = Integer.parseInt(admindto.getUnit_price());
-			amount = (this.getQuantity() * y);
+			amount = (this.getQuantity() * product.getPrice());
 			return amount;
 		}
 

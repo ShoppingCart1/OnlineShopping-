@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.logging.Logger;
 import javax.servlet.jsp.PageContext;
 
-import com.mivim.dto.AdminDTO;
+import com.mivim.controller.Product;
 
 public class ShoppingCart {
   
@@ -19,14 +19,14 @@ public class ShoppingCart {
 		itemsMap = new HashMap<Integer, ShoppingCartItem>();
 	}
 	// Adds items to the shopping cart
-		public synchronized void add(int productID, AdminDTO p) {
+		public synchronized void add(int productID, Product p) {
 			ShoppingCartItem newItem = new ShoppingCartItem(p);
 			itemsMap.put(productID, newItem);
 			LOGGER.info("Quantity is :" + newItem.getQuantity());
 		}
 		// Update items in the shopping cart
 		public synchronized void updateQuantity(int productID, int quantity,
-				AdminDTO p) {
+				Product p) {
 			if (itemsMap.containsKey(productID)) {
 				ShoppingCartItem scItem = (ShoppingCartItem) itemsMap
 						.get(productID);
@@ -75,9 +75,9 @@ public class ShoppingCart {
 					.iterator();
 			while (anotherSCItemIterator.hasNext()) {
 				ShoppingCartItem anotherSCItem = anotherSCItemIterator.next();
-				AdminDTO admindto = anotherSCItem.getAdminDTO();
-				double y = Integer.parseInt(admindto.getUnit_price());
-				amount += (anotherSCItem.getQuantity() * y);
+				Product product = anotherSCItem.getProduct();
+				
+				amount += (anotherSCItem.getQuantity() * product.getPrice());
 			}
 
 			return amount;
