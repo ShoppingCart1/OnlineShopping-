@@ -21,39 +21,70 @@ public class LoginServlet extends HttpServlet {
     		response.setContentType("text/html");  
  	        PrintWriter out = response.getWriter();  
  	        
- 	        String name=request.getParameter("username");  
- 	        String password=request.getParameter("password"); 
-		HttpSession session = request.getSession();
+ 	        String username = request.getParameter("username");  
+ 	        String password = request.getParameter("password"); 
+ 	        String loginMode = request.getParameter("loginmode");
+ 	        HttpSession session = request.getSession();
 
  
  	        try {
+ 	        	
+ 	        	System.out.println("Test");
+ 	        	String userId = LoginServices.getUserIdService(username, password);
+ 	        	System.out.println(userId);
 				
- 	        	String userId = LoginServices.getUserIdService(name, password);
-				
-				if(!userId.equals(null)){
+				if(!(userId==null)){
 						
 					String roleId = LoginServices.getRoleIdService(userId);
+					System.out.println(roleId);
 						
-						if(roleId.equals("admin")){
-							session.setAttribute("username", name);
-							out.print("Admin logged In sucessfully");
-							RequestDispatcher rd=request.getRequestDispatcher("AdminHome.jsp");  
-							rd.forward(request,response);
+						if(roleId.equals("1")){
+							
+							if(loginMode.equals("admin")){
+								session.setAttribute("username", username);
+								out.print("Admin logged In sucessfully");
+								RequestDispatcher rd=request.getRequestDispatcher("adminhome.jsp");  
+								rd.forward(request,response);
+							}
+						
+							else{
+								out.println("Login mode error");
+								RequestDispatcher rd=request.getRequestDispatcher("user_login.jsp");  
+								rd.include(request, response);
+							}
 						}
 						
 						else{
-							session.setAttribute("username", name);
-							out.print("User logged In sucessfully");
-							RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");  
-			 	            rd.forward(request,response);
+							if(loginMode.equals("user")){
+								session.setAttribute("username", username);
+								out.print("User logged In sucessfully");
+								RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");  
+								rd.forward(request,response);
+							}
+							else{
+								out.println("Login mode error");
+								RequestDispatcher rd=request.getRequestDispatcher("adminlogin.jsp");
+								rd.include(request,response);
+							}
 						}
 					
 				}
+				
 				else{
+					
+					if(loginMode.equals("admin")){
+						 out.println("Please check your username or password");
+			 	         RequestDispatcher rd=request.getRequestDispatcher("adminlogin.jsp");  
+			 	         rd.include(request,response);  	
+					}
+					
+					else{
+						out.println("Please check your username or password");
+			 	        RequestDispatcher rd=request.getRequestDispatcher("user_login.jsp");  
+			 	        rd.include(request,response);  	
+					}
 					 
-				 request.setAttribute("errormessage", "invalid user or password");
-		 	         RequestDispatcher rd=request.getRequestDispatcher("invalid.jsp");  
-		 	         rd.include(request,response);  
+					 
 				
 				}
 			

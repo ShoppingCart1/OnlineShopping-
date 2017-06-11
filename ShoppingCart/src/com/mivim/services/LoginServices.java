@@ -6,8 +6,8 @@ import com.mivim.dao.UserLoginDao;
 
 public class LoginServices {
 	
-	public static String getUserIdService(String name, String password) throws SQLException{
-		String userId = UserLoginDao.getUserId(name, password);
+	public static String getUserIdService(String username, String password) throws SQLException{
+		String userId = UserLoginDao.getUserId(username, password);
 		return userId;
 	}
 	

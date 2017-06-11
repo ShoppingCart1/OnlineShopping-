@@ -9,37 +9,44 @@ import java.sql.Statement;
 import com.mivim.connection.ConnectionManager;
 
 public class UserLoginDao {
+	
 	static Connection con;
-   public static boolean loginCheck(String userName, String passWord) throws SQLException{
+	
+	
+  
+	public static String getUserId(String userName, String passWord) throws SQLException {
+	   String getUserIdQueury = "select * from users where user_name=? and pass_word=?";
+		
+	   String user_id = null;
 	   con = ConnectionManager.getConnection();
-	   String sqlLogin = "Select * from user where user_name=? and password=?";
-	   PreparedStatement pstmt= con.prepareStatement(sqlLogin);
+	   PreparedStatement pstmt= con.prepareStatement(getUserIdQueury);
 	   pstmt.setString(1, userName);
 	   pstmt.setString(2, passWord);
 	   ResultSet rs = pstmt.executeQuery();
+	   
 	   while(rs.next()){
-		   String usrName = rs.getString(2);
-		   String pasWord = rs.getString(3);
-		   if((usrName.equals(userName))&&(pasWord.equals(passWord))){
-			   return true;
-		   }
+		   
+		   user_id = rs.getString(1);
+		   
 	   }
+
+	   return user_id;   
+	}
+
+   public static String getRoleId(String userId) throws SQLException {
+	   String getRoleIdQueury = "select role_id from user_roles where user_id=?";
+	   String role_id = null;
+	   con = ConnectionManager.getConnection();
+	   PreparedStatement pstmt= con.prepareStatement(getRoleIdQueury);
+	   pstmt.setString(1, userId);
+	   ResultSet rs = pstmt.executeQuery();
 	   
-	   //...................both are working........................
-	   
-//	   String sqlLogin = "Select * from user_login";
-//
-//	   Statement stmt=con.createStatement();
-//	   ResultSet rs = stmt.executeQuery(sqlLogin);
-//	   while(rs.next()){
-//		   String usrNamedb = rs.getString(1);
-//		   String pasWorddb = rs.getString(2);
-//		   if((usrNamedb.equals(userName))&&(pasWorddb.equals(passWord))){
-//			   return true;
-//		   }
-//	   }
-	   
-	   return false;
-	   
+	   while(rs.next()){
+		   
+		   role_id = rs.getString(1);
+		   
+	   }
+
+	   return role_id;   
    }
 }
