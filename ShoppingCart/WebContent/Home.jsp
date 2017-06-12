@@ -12,6 +12,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="homestyle.css">
+   <link rel="stylesheet" href="cart.css">
   
 <title>Home Page</title>
 </head>
@@ -73,144 +74,30 @@
      <!--Carousel ends here-->
   
 <!-- PRODUCTS IMAGES -->
-<!-- Electronics product -->
-<div id="Electronics">
-<div class="row text-center" style="padding top:40px;">
- <h2><i class="fa fa-cog fa-spin"></i>&nbsp;ELECTRONICS</h2>
-        <hr class="small">     	
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""> <img src= "Image/mobile.png" alt="" style="height: 100px;" ></a>
-   
-  </div>
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""><img src="Image/laptop.png" alt="" style="height: 100px;" ></a>
-    
-  </div>
-  <div class="col-lg-4">
-  	 <a class="navbar-brand" href=""><img src="Image/tablets.jpg" alt="" style="height: 100px;" ></a>
-   
-  </div>
- </div>
- <div class="row text-center" style="padding top:40px;">
-
-        <hr class="small">     	
-  <div class="col-lg-4">
-  	
-    <a class="navbar-brand" href=""> <img src="Image/camera.jpg" alt="" style="height: 100px;" ></a>
-  </div>
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""><img src="Image/tv.jpg" alt="" style="height: 100px;" ></a>
-    
-  </div>
-  <div class="col-lg-4">
-  	  <a class="navbar-brand" href=""><img src="Image/computer.jpg" alt="" style="height: 100px;" ></a>
-    
-  </div>
- </div>
- 
-</div>
-<!-- Electronics product ends here -->
-<!-- Men product -->
-<div id="Men" style="padding top:80px;">
-<div class="row text-center" style="padding top:40px;">
- <h2><i class="fa fa-cog fa-spin"></i>&nbsp;MEN</h2>
-        <hr class="small">     	
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""> <img src="Image/topwear1.jpg"  alt="" style="height: 120px;" ></a>
-   
-  </div>
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""><img src="Image/shirtwear2.jpg" alt="" style="height: 120px;" ></a>
-    
-  </div>
-  <div class="col-lg-4">
-  	 <a class="navbar-brand" href=""><img src="Image/man shoes2.jpg" alt="" style="height: 120px;" ></a>
-   
-  </div>
- </div>
- <div class="row text-center" style="padding top:40px;">
-
-        <hr class="small">     	
-  <div class="col-lg-4">
-  	
-    <a class="navbar-brand" href=""> <img src="Image/manshoes1.jpg" alt="" style="height: 120px;" ></a>
-  </div>
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""><img src="Image/watchmen1.jpg" alt="" style="height: 120px;" ></a>
-    
-  </div>
-  <div class="col-lg-4">
-  	  <a class="navbar-brand" href=""><img src="Image/sportswearman.jpg" alt="" style="height: 120px;" ></a>
-    
-  </div>
- </div>
- 
-</div>
-<!-- Men product ends here -->
-
-<!-- Women product -->
-<div id="Men" style="padding top:80px;">
-<div class="row text-center" style="padding top:40px;">
- <h2 style="padding top:40px;"><i class="fa fa-cog fa-spin"></i>&nbsp;WOMEN</h2>
-        <hr class="small">     	
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""> <img src="Image/womenjwellary.jpg"  alt="" style="height: 120px;" ></a>
-   
-  </div>
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""><img src="Image/womenshoes1.jpg" alt="" style="height: 120px;" ></a>
-    
-  </div>
-  <div class="col-lg-4">
-  	 <a class="navbar-brand" href=""><img src="Image/womensportswear.jpg" alt="" style="height: 120px;" ></a>
-   
-  </div>
- </div>
- <div class="row text-center" style="padding top:40px;">
-
-        <hr class="small">     	
-  <div class="col-lg-4">
-  	
-    <a class="navbar-brand" href=""> <img src="Image/womentop1.jpg" alt="" style="height: 120px;" ></a>
-  </div>
-  <div class="col-lg-4">
-  	<a class="navbar-brand" href=""><img src="Image/Womentop2.jpg" alt="" style="height: 120px;" ></a>
-    
-  </div>
-  <div class="col-lg-4">
-  	  <a class="navbar-brand" href=""><img src="Image/frock.jpg" alt="" style="height: 120px;" ></a>
-    
-  </div>
- </div>
- 
-</div>
-<!-- Women product ends here -->
-<h1 style="padding-top:200px;">Home JSP</h1>
-<div class="container" style="padding-top:200px;">
-			<div class="row">
-				<div>
-					<c:forEach var="products" items="${list.rows}">
-						<c:url var="url" value="/product">
+<div>
+<table id="product_table" class="table" style="padding-top:20px;">
+						<thead>
+							<tr class="cart_menu">
+								<td class="image">Product</td>
+								<td class="description"></td>
+					<td class="quantity">Name</td>
+								<td class="price">Price</td>
+						</tr>
+						</thead>
+						<tbody>
+						<c:forEach var="products" items="${list.rows}">
+						<c:url var="url" value="/Product.jsp">
 							<c:param name="productId" value="${products.id}" />
 						</c:url>
-						<div class="col-lg-3">
-							
-						</div>
-						<div class="col-lg-6">
-							<a href="${url}"><img src="Image/${products.id}.jpg" style="height: 120px;"/></a></br>
-							<a href="${url}">${products.name}</a>
-					   </div> 
-						<div class="col-lg-3">
-							
-						</div>
-						<hr>
-					</c:forEach>
-
-				</div>
-			</div>
-		</div>
-
-
+						<tr>
+						<td><a href="${url}"><img src="Image/${products.id}.jpg" style="height: 120px;"/></td>
+								<td><a href="${url}">${products.name}</a></td>
+							<td>Rs ${products.price}</td>
+						</tr>	
+						</c:forEach>
+						</tbody>
+						</table>
+</div>
 <!-- END OF PRODUCT IMAGES -->
 
     
