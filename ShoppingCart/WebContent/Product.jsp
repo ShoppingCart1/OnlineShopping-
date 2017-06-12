@@ -31,22 +31,33 @@
 				
 		<c:forEach var="products" items="${item.rows}">
 		 <hr class="small">
+		 <form >
+		 <input type="hidden" name="itemId" value="${products.id}">
+		 <input type="hidden" name="itemName" value="${products.name}">
+		 <input type="hidden" name="itemDescription" value="${products.description}">
+		 <input type="hidden" name="price" value="${products.price}">
+		 
+		 </form>
 			<h1 class="text-center"><img src="Image/${products.id}.jpg" style="height: 120px;"/></h1>
 				<h3 class="text-center"><a >${products.name}</a></h3>
 				<h3 class="text-center">${products.description}</h3>
 				<h3 class="text-center">Rs ${products.price}</h3>
+		
 		 <hr class="small">
-		</c:forEach> 
+		 
 		       <div class="text-center">
 				<button type="button"class="btn btn-primary">Buy Now</button><br><br>
 			 
-			  
-				<form method="post" action="AddCartServlet" class="addCartForm">
-							
-				<button class="btn btn-info" id="addtocart">Add to Cart</button>
-							
-				</form>
+			   <form action="AddCartServlet" method="post">
+		 <input type="hidden" name="itemId" value="${products.id}">
+		 <input type="hidden" name="itemName" value="${products.name}">
+		 <input type="hidden" name="itemDescription" value="${products.description}">
+		 <input type="hidden" name="price" value="${products.price}">
+		 <button class="btn btn-info" id="addtocart">Add to Cart</button>
+		 </form>
 				</div>
+				
+		</c:forEach> 
 </div>
 			
 					
