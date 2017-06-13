@@ -2,10 +2,10 @@
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
-    <%@ page import="java.util.List,com.mivim.dto.AddCartDto" %>
+    <%@ page import="java.util.*,com.mivim.dto.AddCartDto" %>
     
-    <%List<AddCartDto> listDto=(List<AddCartDto>)session.getAttribute("addcart"); 
-    	
+    <%Set<AddCartDto> listDto=(Set<AddCartDto>)session.getAttribute("addcart"); 
+         int counter=listDto.size();
     %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -15,12 +15,14 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
   <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="cart.css">
+  
 <title>Insert title here</title>
 </head>
 <body>
-<!-- Setting the header content -->
+
+  <!-- Setting the header content -->
   <nav class="navbar navbar-inverse navbar-fixed-top opaque-navbar">
   <div class="container">
     <div class="navbar-header">
@@ -37,12 +39,11 @@
       <ul class="nav navbar-nav navbar-right">
          <ul class="nav pull-right">
 				<li class="dropdown"><a id="cartitem" class="dropdown-toggle"
-					data-toggle="dropdown" href="#"><span id="itemcount"
-						class="btn btn-default btn-sm"><i
-							class="icon-shopping-cart icon-red"></i> <c:set var="cartItems"
-								scope="session" value="${cart.numberOfItems}" /> <span
+					data-toggle="dropdown" href="#"><span
+						class="btn btn-default btn-sm"><span class="glyphicon glyphicon-shopping-cart"></span> <c:set var="cartItems"
+								scope="session" value="<%=counter%>" /> <span
 							class="headerCartItemsCount"> <c:choose>
-									<c:when test="${empty cartItems}">0
+									<c:when test="${empty addcart}">0
 							</c:when>
 									<c:otherwise>
 										<c:out value="${cartItems}" />
@@ -61,25 +62,60 @@
     
     </nav>
     <!-- End of navbar -->
-    <table id="product_table" class="table table-condensed">
-						<thead>
+    
+   <div style="padding-top: 60px;" ng-app="">
+   <c:choose>
+				<c:when test="${empty addcart}">
+					<table class="table table-condensed">
+						<tbody>
+							<tr>
+								<div class="hero-unit">
+									<h3>The Shopping Cart is Empty</h3>
+									<a href="Home.jsp" class="btn btn-primary btn-large">Continue
+										Shopping</a>
+								</div>
+							</tr>
+						</tbody>
+					</table>
+				</c:when>
+
+				<c:otherwise>
+    <table id="product_table" class="table">
+						<thead style="background-color: #696763;font-size:20px;">
 							<tr class="cart_menu">
-								<td class="image">Product</td>
-								<td class="description"></td>
-					<td class="">Name</td>
-								<td class="price">Price</td>
-								<td></td>
+								<td style="padding-left:20px;"><strong>Product</strong></td>
+								<td class="numeric" ><strong>Name</strong></td>
+								<td class="numeric"><strong>Price</strong></td>
+								<td class="numeric"><strong>Quantity</strong></td>
+								<td class="numeric"><strong>Total</strong></td>
+								
+								
+								
 							</tr>
 						</thead>
-						<tbody>
+		  <tbody>
 		<%for(AddCartDto dto:listDto)
 			{%>
 			<tr>
-			<td><img src="Image/<%=dto.getId()%>.jpg" style="height: 120px;"/></td>
-			<td><%=dto.getName()%></td>
-			<td><%=dto.getPrice()%></td>
+			<td><img src="Image/<%=dto.getId()%>.jpg" style="height: 120px;width: 150px;padding-left:50px;"/></td>
+			<td class="numeric"><%=dto.getName()%></td>
+			<td class="numeric"><%=dto.getPrice()%></td>
+			<td class="numeric"><input class="form-group col-xs-2" type="number" ng-init="quantity<%=dto.getId()%>='1'" ng-model="quantity<%=dto.getId()%>"></td>
+			<%
+			String s=dto.getPrice();
+			double y = Double.parseDouble(s);
+			
+			%>
+			<td class="numeric">{{quantity<%=dto.getId()%>*<%=y%>}}</td>
+		
+			
 			</tr>
 			
 			<%} %>
+		   </tbody>
+	</table>
+	</c:otherwise>
+	</c:choose>
+</div>
 </body>
 </html>
