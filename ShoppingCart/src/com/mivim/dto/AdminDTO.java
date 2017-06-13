@@ -7,6 +7,10 @@ import java.io.Serializable;
 public class AdminDTO implements Serializable{
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	/*
 	 * All references Initialization here
 	 */

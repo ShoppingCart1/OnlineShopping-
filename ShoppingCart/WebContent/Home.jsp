@@ -21,7 +21,7 @@
     var="DS"
     driver="com.mysql.jdbc.Driver"
     url="jdbc:mysql://localhost:3306/Demo"
-    user="root" password="root"
+    user="root" password="mysql"
 />
 <sql:query var="list"   dataSource="${DS}">
       SELECT * FROM Items;

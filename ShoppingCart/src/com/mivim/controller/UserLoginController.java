@@ -1,4 +1,4 @@
-package com.mivim.controller;
+/*package com.mivim.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -61,3 +61,4 @@ public class UserLoginController extends HttpServlet {
   }
 
 
+*/

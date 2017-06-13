@@ -25,6 +25,7 @@ public class UpadteDAO {
 	static String category_id;
 	static String sub_category_id;
 	static String statusCode;
+	static String uuid;
 
 	private static Connection connection = null;
 	private static PreparedStatement preparedStatement = null;
@@ -47,6 +48,7 @@ public class UpadteDAO {
 		category_id = dto.getCategory_id();
 		sub_category_id = dto.getSub_category();
 		statusCode = dto.getStatus();
+		uuid=generateUUuid();
 		
 		System.out.println(operation);
 		System.out.println(item_id);
@@ -57,6 +59,7 @@ public class UpadteDAO {
 		System.out.println(category_id);
 		System.out.println(sub_category_id);
 		System.out.println(statusCode);
+		System.out.println(uuid);
 
 		connection = ConnectionManager.getConnection();
 		int result=0;
@@ -94,8 +97,8 @@ public class UpadteDAO {
 
 	public static int addNewItem() throws SQLException {
 		preparedStatement = connection.prepareStatement(queryInsert);
-		System.out.println(item_id);
-		preparedStatement.setString(1, generateUUuid());
+		
+		preparedStatement.setString(1, uuid);
 		preparedStatement.setString(2, item_name);
 		preparedStatement.setString(3, unit_price);
 		preparedStatement.setString(4, inventory);
@@ -108,8 +111,8 @@ public class UpadteDAO {
 
 	private static int additemCategory() throws SQLException {
 		preparedStatement = connection.prepareStatement(queryInsertItemCategory);
-		System.out.println(item_id);
-		preparedStatement.setString(1, item_id);
+		
+		preparedStatement.setString(1, uuid);
 		preparedStatement.setString(2, category_id);
 		preparedStatement.setString(3, sub_category_id);
 		int result = preparedStatement.executeUpdate();

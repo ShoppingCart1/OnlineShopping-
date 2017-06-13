@@ -31,6 +31,8 @@
 
      <span class="alert">Invalid Credentials</span>
      <a class="link" href="#">Forgot Password</a>
+     
+     <input type="hidden" value="admin" name="userRole">
      <input type="submit" value="Log in" class="log-btn"> 
      </form>
     <!--    <h3><%= request.getAttribute("errormessage") %></h3> -->

@@ -20,7 +20,7 @@
     var="newDS"
     driver="com.mysql.jdbc.Driver"
     url="jdbc:mysql://localhost:3306/Demo"
-    user="root" password="root"
+    user="root" password="mysql"
 />
 <div class="row">
    <div class="span6">

@@ -11,6 +11,22 @@
     <welcome-file>Home.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
+    <servlet-name>adminHome</servlet-name>
+    <jsp-file>/adminHome.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminHome</servlet-name>
+    <url-pattern>/adminHome</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  		<servlet-name>LostPasswordServlet</servlet-name>
+  		<servlet-class>com.mivim.controller.LostPasswordServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  		<servlet-name>LostPasswordServlet</servlet-name>
+  		<url-pattern>/LostPassword</url-pattern>
+  </servlet-mapping>
+  <servlet>
     <servlet-name>utilServlet</servlet-name>
     <servlet-class>com.mivim.controller.UtilServlet</servlet-class>
   </servlet>
@@ -77,5 +93,15 @@
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/LoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddCartServlet</display-name>
+    <servlet-name>AddCartServlet</servlet-name>
+    <servlet-class>com.mivim.controller.AddCartServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddCartServlet</servlet-name>
+    <url-pattern>/AddCartServlet</url-pattern>
   </servlet-mapping>
 </web-app>

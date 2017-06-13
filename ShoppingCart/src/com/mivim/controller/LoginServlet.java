@@ -3,6 +3,7 @@ package com.mivim.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,8 +12,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.mivim.dao.UserLoginDao;
-import com.mivim.services.LoginServices;
+import com.mivim.dto.ItemDto;
+import com.mivim.dto.LoginDto;
+import com.mivim.services.LoginService;
 
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -21,80 +23,60 @@ public class LoginServlet extends HttpServlet {
     		response.setContentType("text/html");  
  	        PrintWriter out = response.getWriter();  
  	        
- 	        String username = request.getParameter("username");  
- 	        String password = request.getParameter("password"); 
- 	        String loginMode = request.getParameter("loginmode");
- 	        HttpSession session = request.getSession();
+ 	        String username=request.getParameter("username");  
+ 	        String password=request.getParameter("password");
+ 	        String userRole =request.getParameter("userRole");
+ 	        
+ 	        System.out.println(username);
+ 	        System.out.println(password);
+ 	        System.out.println(userRole);
 
- 
+ 	        LoginDto loginDto=new LoginDto();
+ 	        
+ 	        loginDto.setUsername(username);
+ 	        loginDto.setPassword(password);
+
  	        try {
- 	        	
- 	        	System.out.println("Test");
- 	        	String userId = LoginServices.getUserIdService(username, password);
- 	        	System.out.println(userId);
+				LoginDto dto= LoginService.getLoginService(loginDto);
 				
-				if(!(userId==null)){
-						
-					String roleId = LoginServices.getRoleIdService(userId);
-					System.out.println(roleId);
-						
-						if(roleId.equals("1")){
-							
-							if(loginMode.equals("admin")){
-								session.setAttribute("username", username);
-								out.print("Admin logged In sucessfully");
-								RequestDispatcher rd=request.getRequestDispatcher("adminhome.jsp");  
-								rd.forward(request,response);
-							}
-						
-							else{
-								out.println("Login mode error");
-								RequestDispatcher rd=request.getRequestDispatcher("user_login.jsp");  
-								rd.include(request, response);
-							}
-						}
-						
-						else{
-							if(loginMode.equals("user")){
-								session.setAttribute("username", username);
-								out.print("User logged In sucessfully");
-								RequestDispatcher rd=request.getRequestDispatcher("Home.jsp");  
-								rd.forward(request,response);
-							}
-							else{
-								out.println("Login mode error");
-								RequestDispatcher rd=request.getRequestDispatcher("adminlogin.jsp");
-								rd.include(request,response);
-							}
-						}
-					
-				}
+				String role=dto.getRole();
+				String name=dto.getUsername();
 				
-				else{
-					
-					if(loginMode.equals("admin")){
-						 out.println("Please check your username or password");
-			 	         RequestDispatcher rd=request.getRequestDispatcher("adminlogin.jsp");  
-			 	         rd.include(request,response);  	
+				HttpSession session=request.getSession();
+				RequestDispatcher requestDispatcher;
+				System.out.println(name);
+				System.out.println(role);
+				
+					if(name!=null && role.equals("admin")){
+					session.setAttribute("adminName", name);
+					List<ItemDto> itemDto=LoginService.getItemDetailsService();
+					request.setAttribute("itemDetails", itemDto);
+					requestDispatcher=request.getRequestDispatcher("adminHome.jsp");
+					requestDispatcher.forward(request, response);
 					}
-					
-					else{
-						out.println("Please check your username or password");
-			 	        RequestDispatcher rd=request.getRequestDispatcher("user_login.jsp");  
-			 	        rd.include(request,response);  	
+					else if(name!=null && role.equals("customer"))
+					{
+						session.setAttribute("customerName", name);
+						requestDispatcher=request.getRequestDispatcher("Home.jsp");
+						requestDispatcher.forward(request, response);
 					}
-					 
-					 
+					else
+					{
+						out.println("Your role Not available");
+						request.setAttribute("errorMessage", "You giving wrong credentials");
+						requestDispatcher=request.getRequestDispatcher("loginFail.jsp");
+						requestDispatcher.include(request, response);
+					}
 				
-				}
-			
- 	        } catch (SQLException e) {
+				
+				
+
+				
+			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
- 	        
-
- 	        out.close();  
+ 	       
  	    }  
   }
 

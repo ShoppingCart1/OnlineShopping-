@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import com.mivim.dao.UserLoginDao;
 
-public class LoginServices {
+public class LoginServices  {
 	
 	public static String getUserIdService(String username, String password) throws SQLException{
 		String userId = UserLoginDao.getUserId(username, password);

@@ -29,9 +29,11 @@ public class ItemUpdateServlet extends HttpServlet {
 		
 		ServletContext context=getServletContext();
 		PrintWriter out =response.getWriter();	
-		
+		String item_id = null;
 		String operation = request.getParameter("operation");
-		String item_id = request.getParameter("itemId");
+		if(operation.equals("UpdateItem")){
+			item_id = request.getParameter("itemId");
+		}
 		String item_name=request.getParameter("itemName");
 		String unit_price=request.getParameter("unitPrice");
 		
@@ -93,10 +95,7 @@ public class ItemUpdateServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+
 	}
 
 	
