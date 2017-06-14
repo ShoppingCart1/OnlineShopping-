@@ -35,12 +35,14 @@ public class LoginServlet extends HttpServlet {
  	        
  	        loginDto.setUsername(username);
  	        loginDto.setPassword(password);
+ 	        
 
  	        try {
 				LoginDto dto= LoginService.getLoginService(loginDto);
 				
 				String role=dto.getRole();
 				String name=dto.getUsername();
+				String userId=dto.getUserId();
 				
 				HttpSession session=request.getSession();
 				RequestDispatcher requestDispatcher;
@@ -49,6 +51,7 @@ public class LoginServlet extends HttpServlet {
 				
 					if(name!=null && role.equals("admin")){
 					session.setAttribute("adminName", name);
+					session.setAttribute("userId", userId);
 					List<ItemDto> itemDto=LoginService.getItemDetailsService();
 					request.setAttribute("itemDetails", itemDto);
 					requestDispatcher=request.getRequestDispatcher("adminHome.jsp");
@@ -62,14 +65,11 @@ public class LoginServlet extends HttpServlet {
 					}
 					else
 					{
-						out.println("Your role Not available");
+						out.println("You are not Registered..");
 						request.setAttribute("errorMessage", "You giving wrong credentials");
 						requestDispatcher=request.getRequestDispatcher("loginFail.jsp");
 						requestDispatcher.include(request, response);
 					}
-				
-				
-				
 
 				
 			} catch (SQLException e) {

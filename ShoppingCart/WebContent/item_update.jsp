@@ -26,6 +26,7 @@
 <link rel="stylesheet" type="text/css" href="adminForm.css">
 </head>
 <body>
+	<jsp:include page="adminHeader.jsp"/>
 	<div class="form-style">
 	<fieldset>
 	<legend> Update Item Info</legend>

@@ -3,33 +3,9 @@ package com.mivim.dto;
 public class AddCartDto {
 	
 	private String id;
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((id == null) ? 0 : id.hashCode());
-		return result;
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		AddCartDto other = (AddCartDto) obj;
-		if (id == null) {
-			if (other.id != null)
-				return false;
-		} else if (!id.equals(other.id))
-			return false;
-		return true;
-	}
 	private String name;
 	private String description;
 	private String price;
-	private String inventory;
 	
 	public String getId() {
 		return id;
@@ -54,12 +30,6 @@ public class AddCartDto {
 	}
 	public void setPrice(String price) {
 		this.price=price;
-	}
-	public String getInventory() {
-		return inventory;
-	}
-	public void setInventory(String inventory) {
-		this.inventory=inventory;
 	}
 
 }

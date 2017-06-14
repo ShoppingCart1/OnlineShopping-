@@ -14,7 +14,9 @@ import com.mivim.dto.LoginDto;
 public class LoginDAO {
 
 	private static String query = "select role,(select username from user"
-			+ " where (user_id= ? or email=?) and password= ?) as username from roles "
+			+ " where (user_id= ? or email=?) and password= ?) as username,"
+			+ "(select user_id from user"
+			+ " where (user_id= ? or email=?) and password= ?) as userId from roles "
 			+ "where role_id= (select role_id from user_role where user_id="
 			+ "(select user_id from user where (user_id=? or email=?) and password=?))";
 
@@ -26,6 +28,7 @@ public class LoginDAO {
 	private static ResultSet resultSet = null;
 	private static String name = null;
 	private static String role = null;
+	private static String userId=null;
 
 	public static LoginDto getLoginDAO(LoginDto loginDto) throws SQLException {
 
@@ -45,14 +48,19 @@ public class LoginDAO {
 		preparedStatement.setString(4, username);
 		preparedStatement.setString(5, username);
 		preparedStatement.setString(6, password);
-		System.out.println("abc");
+		preparedStatement.setString(7, username);
+		preparedStatement.setString(8, username);
+		preparedStatement.setString(9, password);
+		
 		resultSet = preparedStatement.executeQuery();
 		if (resultSet.next()) {
 			System.out.println("resultSet is fine");
 			name = resultSet.getString("username");
 			role = resultSet.getString("role");
+			userId=resultSet.getString("userId");
 			dto.setUsername(name);
 			dto.setRole(role);
+			dto.setUserId(userId);
 		}
 		connection.close();
 		preparedStatement.close();

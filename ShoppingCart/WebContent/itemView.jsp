@@ -5,12 +5,12 @@
     <%String adminName=(String)session.getAttribute("adminName");
     if(adminName!=null)
     	{%>
-   <%List<ItemDto> listDto=(List<ItemDto>)request.getAttribute("itemDetails"); %> 
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AdminHomePage</title>
+<title>ItemView</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style>
@@ -18,8 +18,10 @@
 @import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister');
 @import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister');
 @import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister|Milonga');
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
 
-a:link, a:visited {
+
+ a:link, a:visited {
     background-color: #6098f2;
     color: white;
     padding: 14px 25px;
@@ -27,6 +29,7 @@ a:link, a:visited {
     text-decoration: none;
     display: inline-block;
 }
+
 
  a:hover, a:active {
     background-color: #1a6cef;
@@ -58,50 +61,56 @@ a:link, a:visited {
 		font-family: 'Love Ya Like A Sister', cursive;
 		font-size	:30px;
 }
-#logout
-{
-	font-family: 'Love Ya Like A Sister', cursive;
-	font-family: 'Averia Libre', cursive;
-	font-size:20px;
-	
-}
-#name{
-		font-family: 'Love Ya Like A Sister', cursive;
-		font-family: 'Averia Libre', cursive;
-		font-family: 'Milonga', cursive;
-		font-size: 20px;
-		padding: 0px 20px 0px 0px;
 
-}
 
 body{
 		padding:0px 100px 0px 100px;
 }
-
+#itemName{
+			font-family: 'Love Ya Like A Sister', cursive;
+		font-family: 'Averia Libre', cursive;
+		font-size:40px;
+		font-weight:bold;
+		
+}
+#itemDescription{font-family: 'Philosopher', sans-serif;
+					font-size: 25px;
+				}
+				
+	#price{font-family: 'Philosopher', sans-serif;
+					font-size: 25px;
+					color:28px;
+	}
 </style>
 </head>
 <body>
-<jsp:include page="adminHeader.jsp"/>
-<%for(ItemDto dto:listDto)
-	{
-	
+<jsp:include page="adminHeader.jsp"></jsp:include>
+<%
+	ItemDto dto=(ItemDto)request.getAttribute("itemView"); 
 	String itemId=dto.getItemId();
 	String itemName=dto.getItemName();
 	String price=dto.getUnitPirce();
 	String itemDescription=dto.getItemDescription();
 	String inventary=dto.getInventary();%>
+	<table style="width:100%" >	 
+	<tr>
+	<td rowspan="2"><div class="itemView">
 	
-<div class="itemView">
-  <img src="Image/<%=itemId%>.jpeg" alt="Image/<%=itemId%>.jpeg" style="width:304px;height:250px;">
-  <p style="width:304px;height:80px;"><%=itemName %></p>
-  <table style="width:100%">
-   <tr><td><p><a href="#" class="price" >&#x20B9;<%=price %></a></p></td>
-   <td align="right"><p><a href="/ShoppingCart/ItemViewServlet?itemId=<%=itemId%>&itemName=<%=itemName%>&price=<%=price%>&itemDescription=<%=itemDescription%>&inventary=<%=inventary%>">View Item</a></p></td>
-   </tr>
-   </table>
-</div>
-<%} %>
-
+ 	  <img src="Image/<%=itemId%>.jpeg" alt="Image/<%=itemId%>.jpeg" style="width:320px;height:450px;">
+ 	  </div>
+ 	  </td>
+ 	  <td><p id="itemName"><%=itemName %></p>
+ 	  	<samp style="font-weight:bold; font-size:30px;">Description:</samp><p id="itemDescription"><%=itemDescription %></p>
+ 	  	<p id="price">&#x20b9;<%=price %></p>
+ 	  </td>
+ 	  </tr>
+ 	  <tr>
+ 	  		<td><p><a href="/ShoppingCart/UtilUpdateForm?itemId=<%=itemId %>">Update Item</a></p></td>
+ 	  		<td><p style="float:right;"><a href="/ShoppingCart/UtilUpdateForm?itemId=<%=itemId %>" disabled>Remove Item</a></p></td>
+ 	  </tr>
+ 	 
+ 	 </table>
+ 	
 <%}
     else
     {
