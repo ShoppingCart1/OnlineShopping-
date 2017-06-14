@@ -1,8 +1,8 @@
 package com.mivim.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.mivim.dto.AddCartDto;
-import com.mivim.services.ProductService;
 
 /**
  * Servlet implementation class AddCartServlet
@@ -42,25 +41,27 @@ public class AddCartServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+		
 		HttpSession session = request.getSession();
 		String itemId = request.getParameter("itemId");
 		String itemName = request.getParameter("itemName");
 		String itemDescription = request.getParameter("itemDescription");
 		String price = request.getParameter("price");
+		String inventory = request.getParameter("inventary");
+		Set<AddCartDto> addCartDtos = null;
 
-		List<AddCartDto> addCartDtos = null;
-
-		addCartDtos = (List<AddCartDto>) session.getAttribute("cart");
+		addCartDtos = (Set<AddCartDto>) session.getAttribute("cart");
 		if (addCartDtos == null) {
-			addCartDtos = new ArrayList<AddCartDto>();
+			addCartDtos = new HashSet<AddCartDto>();
 			session.setAttribute("cart", addCartDtos);
 		}
 
 		AddCartDto dto = new AddCartDto();
-		dto.setId(itemId);
-		dto.SetName(itemName);
-		dto.setDescription(itemDescription);
-		dto.setPrice(price);
+		dto.setItemId(itemId);
+		dto.setItemName(itemName);
+		dto.setItemDescription(itemDescription);
+		dto.setUnitPirce(price);
+		dto.setInventary(inventory);
 		addCartDtos.add(dto);
 		session.setAttribute("addcart", addCartDtos);
 

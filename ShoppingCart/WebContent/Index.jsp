@@ -1,21 +1,17 @@
+<%@page import="com.mivim.dao.LoginDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.List,com.mivim.dto.ItemDto"%>
     
- 
-   <%ItemDto dto=(ItemDto)request.getAttribute("productView"); %> 
+    <%
+     List<ItemDto> listDto=LoginDAO.getItemDetailsDAO();%> 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Product</title>
+<title>Index Page</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
 <style>
 
 @import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister');
@@ -87,7 +83,8 @@ body{
 <body>
 <!-- navbar starts here -->
 <div class="w3-container w3-amber">
-	<span style="float:left;" id="title">Online Shopping</span>
+    <!-- <a href="" style="float:left;"><img src="Image/logo-design.png" alt="" width="80" height="30"> -->
+	<span style="float:left;" id="title" >Online Shopping</span>
 
 <%
 String s1=(String)session.getAttribute("customerName");
@@ -102,31 +99,28 @@ String s1=(String)session.getAttribute("customerName");
 <% }%>
 </div>
 <!-- Navbar ends here -->
-<%
+
+<%for(ItemDto dto:listDto)
+	{
+	
 	String itemId=dto.getItemId();
 	String itemName=dto.getItemName();
 	String price=dto.getUnitPirce();
 	String itemDescription=dto.getItemDescription();
-	String inventary=dto.getInventary();%>
+	String inventary=dto.getInventary(); %>
 	
 <div class="itemView">
   <img src="Image/<%=itemId%>.jpeg" alt="Image/<%=itemId%>.jpeg" style="width:304px;height:250px;">
   <p style="width:304px;height:80px;"><a><%=itemName %></a></p>
   <table style="width:100%">
    <tr><td><p><a href="#" class="price" >&#x20B9;<%=price %></a></p></td>
-   <td align="right"><p><a href="ShoppingCart/ItemViewServlet?itemId=<%=itemId%>&itemName=<%=itemName%>&price=<%=price%>&itemDescription=<%=itemDescription%>&inventary=<%=inventary%>">View Item</a></p></td>
+   <td align="right"><p><a href="/ShoppingCart/ProductViewServlet?itemId=<%=itemId%>&itemName=<%=itemName%>&price=<%=price%>&itemDescription=<%=itemDescription%>&inventary=<%=inventary%>">View Item</a></p></td>
    </tr>
    </table>
 </div>
-<form action="AddCartServlet" method="post">
-		 <input type="hidden" name="itemId" value="<%=itemId%>">
-		 <input type="hidden" name="itemName" value="<%=itemName%>">
-		 <input type="hidden" name="itemDescription" value="<%=itemDescription%>">
-		 <input type="hidden" name="price" value="<%=price%>">
-		 <input type="hidden" name="inventary" value="<%=inventary%>">
-		 <button class="btn btn-info" id="addtocart">Add to Cart</button>
-</form>
-			
+<%} %>
+
+<%@ include file="footer.jsp" %>
 
 </body>
 </html>
