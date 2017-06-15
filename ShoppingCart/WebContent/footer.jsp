@@ -13,7 +13,7 @@
 <title></title>
 </head>
 <body>
-<div class="text-center">
+<div class="text-center" style="padding-top:100px;">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <ul class="list-inline text-center" style="padding-top:30px;">
                         <li>
@@ -41,8 +41,9 @@
                             </a>
                         </li>
                     </ul>
-          <p style="font-size: 15px;">Copyright &copy; <a href="Home.jsp">Online Shopping &nbsp;</a>2017 | Developed by <a>MIVIM IT SOLUTIONS</a></p>
+          <p style="font-size: 15px;">Copyright &copy; <a href="Index.jsp" style="color:blue;">Online Shopping &nbsp;</a>2017 | Developed by <a style="color:blue;">MIVIM IT SOLUTIONS</a></p>
         </div>
+       
  </div>
 </body>
 </html>
