@@ -2,6 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ page import="java.util.List,com.mivim.dto.ItemDto"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  
+    <%@ page import="java.util.*,com.mivim.dto.AddCartDto" %>
     
     <%
      List<ItemDto> listDto=LoginDAO.getItemDetailsDAO();%> 
@@ -9,33 +12,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <!-- Style -->
 <link rel="stylesheet" href="index.css">
-<title>Index Page</title>
+<title>Shopping Cart</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="icon" href="Image/logo-design.png" sizes="16x16">
 </head>
 <body>
-<!-- navbar starts here -->
-<div class="w3-container w3-amber">
-    <a  href="Index.jsp" style="float:left;"><img src="Image/logo-design.png" alt=" " width="60" height="40">
-      </a>
-	<a href="Index.jsp"><span id="title">&nbsp;Online Shopping</span></a>
-<%
-String s1=(String)session.getAttribute("customerName");
-%>
-<%if(s1==null) {%>
-	                                
-	 <a href="user_login.jsp" style="float:right;"><button class="btn btn-info"  id="login"> <span class="glyphicon glyphicon-user"></span>Login</button></a>
-<% }
- else{ %>
- <a href="/ShoppingCart/LogoutServlet" style="float:right;" id="logout">&nbsp;&nbsp;<button class="btn btn-info"  id="logout"> <span class="glyphicon glyphicon-user"></span>Logout</button></a>
- <span style="float:right;">&nbsp;Hello&nbsp;<%=s1 %>!</span>
-
-<% }%>
-</div>
-<!-- Navbar ends here -->
-
+<%@ include file="header.jsp" %>
 <%for(ItemDto dto:listDto)
 	{
 	
