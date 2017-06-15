@@ -27,10 +27,11 @@ public class AddressServlet extends HttpServlet {
           String addressline1 = request.getParameter("addressline1");
           String addressline2 = request.getParameter("addressline2");
           String city = request.getParameter("city");
-          String state = request.getParameter("state");
+          String state = request.getParameter("stateId");
           String pincode = request.getParameter("pincode");
           int status = Integer.parseInt(request.getParameter("status"));  //need to check here
-          
+                    
+          System.out.println(city+" "+state);
           AddressDto adto = new AddressDto();
           
           adto.setUser_id(user_id);

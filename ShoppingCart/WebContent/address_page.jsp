@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.List"%>
+<%@ page import="com.mivim.dto.StateDto,com.mivim.dto.CategoriesDto,com.mivim.dao.UtilDAO"%>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,7 +17,6 @@
     width: 1200px;
     margin: 0 auto;
     height: 920px;
-    background-color: #e6e6e6;
 }
 .container{
  margin-left: 200px;
@@ -40,8 +41,25 @@ margin-top: -53px;
 <div class="container">
 <textarea rows="4" cols="50" name="addressline1" placeholder="Enter Address Line 1" style="font-family: monospace;" required></textarea><br><br>
 <textarea rows="4" cols="50" name="addressline2" placeholder="Enter Address Line 2" style="font-family: monospace;" required></textarea><br><br>
-<input type="text" name="city" placeholder="Enter City here" style="font-family: monospace;" required /><br><br>
-<input type="text" name="state" placeholder="Enter State here" style="font-family: monospace;" required /><br><br>
+<label style="color: blue"></label><select
+			name="stateId" id="states">
+			<option selected disabled>Select State</option>
+			<%
+				List<StateDto> list = UtilDAO.getStateElements();
+				for (StateDto states : list) {
+			%>
+			<option value="<%=states.getCity_id()%>"><%=states.getCity_name()%></option>
+			<%
+			System.out.println(states.getCity_id()+" "+states.getCity_name());
+				}
+			%>
+		</select><br>
+		<br> <label style="color: blue"></label><select
+			name="city" id="city">
+			
+			<option selected disabled>Select City</option>
+
+		</select><br><br>
 <input type="text" name="pincode" placeholder="Enter Pincode here" style="font-family: monospace;" required /><br><br>
 <input type="hidden" name="user_id" value="1234"/>
 <input type="hidden" name="status" value="1"/>
@@ -55,5 +73,28 @@ margin-top: -53px;
 </div>
 </form>
 </div>
+<script>
+		$(document).ready(
+				function() {
+
+					$('#states').change(
+							function(event) {
+								var states = $("select#states").val();
+								$.get('UtilServletCity', {
+									city_id : states
+								}, function(response) {
+									var select = $('#city');
+									select.find('option').remove();
+									$.each(response, function(index, value) {
+										$('<option>').val(value.city_name).text(
+												value.city_name).appendTo(
+												select);
+									}, function(error) {
+									});
+								});
+							});
+
+				});
+	</script>
 </body>
 </html>
