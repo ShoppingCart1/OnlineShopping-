@@ -24,6 +24,27 @@
 <!-- Style -->
 <link rel="stylesheet" href="index.css">
 <link rel="icon" href="Image/logo-design.png" sizes="16x16">
+<style>
+@import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister');
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister');
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister|Milonga');
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
+#itemName{
+			font-family: 'Love Ya Like A Sister', cursive;
+		font-family: 'Averia Libre', cursive;
+		font-size:30px;
+		font-weight:bold;
+		
+}
+#itemDescription{font-family: 'Philosopher', sans-serif;
+					font-size: 20px;
+				}
+				
+	#price{font-family: 'Philosopher', sans-serif;
+					font-size: 25px;
+					color:black;
+	}
+</style>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -38,7 +59,7 @@
   <img src="Image/<%=itemId%>.jpeg" alt="Image/<%=itemId%>.jpeg" style="width:320px;height:450px;">
  	  </div>
  	  
- 	  <p id="itemName" style="padding-top:40px;"><%=itemName %></p><br><br>
+ 	  <p id="itemName" style="padding-top:40px;" id="itemName"><%=itemName %></p><br><br>
  	  	<samp style="font-weight:bold; font-size:30px;">Description:</samp><p id="itemDescription"><%=itemDescription %></p>
  	  	<p id="price">&#x20b9;<%=price %></p>
 <div style="padding-top:230px;"> 

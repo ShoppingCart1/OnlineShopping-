@@ -7,9 +7,15 @@ import com.mivim.dto.AddressDto;
 
 public class AddressService {
  
-	public static int getAddressService(AddressDto adto) throws SQLException{
-		int checkExecute = AddressDao.executeAddressQuery(adto);
-		return checkExecute;
+	public static String getAddressService(AddressDto adto) throws SQLException{
+		int status = AddressDao.executeAddressQuery(adto);
+		String address=null;
+		if(status!=0)
+		{
+			address=adto.getAddressline1()+","+adto.getAddressline2()+","+adto.getCity()+","+adto.getState()+"-"+adto.getPincode();
+		}
+		
+		return address;
 		
 	}
 }

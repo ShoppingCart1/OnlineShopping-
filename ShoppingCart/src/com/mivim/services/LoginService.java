@@ -13,6 +13,7 @@ public class LoginService {
 		
 		System.out.println("This is Test for Service");
 		LoginDto dto=LoginDAO.getLoginDAO(loginDto);
+		System.out.println(dto.getUserId());
 		return dto;
 	}
 

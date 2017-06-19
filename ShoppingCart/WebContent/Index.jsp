@@ -1,6 +1,6 @@
-<%@page import="com.mivim.dao.LoginDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@page import="com.mivim.dao.LoginDAO"%>
     <%@ page import="java.util.List,com.mivim.dto.ItemDto"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql" %>  

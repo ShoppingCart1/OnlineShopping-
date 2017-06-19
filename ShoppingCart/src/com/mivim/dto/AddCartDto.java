@@ -1,6 +1,8 @@
 package com.mivim.dto;
 
-public class AddCartDto {
+import java.io.Serializable;
+
+public class AddCartDto implements Serializable {
 	
 	private String itemId=null;
 	@Override
@@ -26,6 +28,7 @@ public class AddCartDto {
 			return false;
 		return true;
 	}
+	
 	private String itemName=null;
 	private String unitPirce=null;
 	private String inventary=null;

@@ -36,7 +36,15 @@ public class LostPasswordServlet extends HttpServlet {
 		passwordDto.setEmail(email);
 		
 		try {
-			PasswordService.getPasswordService(passwordDto);
+			boolean flag=PasswordService.getPasswordService(passwordDto);
+			if(flag)
+			{
+				request.getRequestDispatcher("lostPasswordSuccess.jsp").forward(request, response);
+			}
+			else
+			{
+				request.getRequestDispatcher("lostPasswordFail.jsp").forward(request, response);
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

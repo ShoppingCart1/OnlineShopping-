@@ -48,27 +48,35 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher requestDispatcher;
 				System.out.println(name);
 				System.out.println(role);
+				System.out.println(userId);
 				
-					if(name!=null && role.equals("admin")){
+					if(name!=null && role.equals("admin") && userRole.equals("admin")){
 					session.setAttribute("adminName", name);
-					session.setAttribute("userId", userId);
+					
 					List<ItemDto> itemDto=LoginService.getItemDetailsService();
-					request.setAttribute("itemDetails", itemDto);
+					
 					requestDispatcher=request.getRequestDispatcher("adminHome.jsp");
 					requestDispatcher.forward(request, response);
 					}
-					else if(name!=null && role.equals("customer"))
+					else if(name!=null && role.equals("customer") && userRole.equals("customer"))
 					{
 						session.setAttribute("customerName", name);
-						requestDispatcher=request.getRequestDispatcher("Home.jsp");
+						session.setAttribute("userId", userId);
+						requestDispatcher=request.getRequestDispatcher("index.jsp");
 						requestDispatcher.forward(request, response);
 					}
-					else
+					else if(userRole.equals("admin"))
 					{
-						out.println("You are not Registered..");
+						
 						request.setAttribute("errorMessage", "You giving wrong credentials");
-						requestDispatcher=request.getRequestDispatcher("loginFail.jsp");
-						requestDispatcher.include(request, response);
+						requestDispatcher=request.getRequestDispatcher("adminlogin.jsp");
+						requestDispatcher.forward(request, response);
+					}
+					else if(userRole.equals("customer"))
+					{
+						request.setAttribute("errorMessage", "You giving wrong credentials");
+						requestDispatcher=request.getRequestDispatcher("user_login.jsp");
+						requestDispatcher.forward(request, response);
 					}
 
 				

@@ -1,12 +1,14 @@
 package com.mivim.dto;
 
-public class OrderDto {
+import java.io.Serializable;
+
+public class OrderDto implements Serializable{
    private String userId;
    private String subTotal;
-   private String itemId;
+   private String itemId[];
    private String itemName;
-   private String total;
-   private String quantity;
+   private String total[];
+   private String quantity[];
    private double price;
    
    public double getPrice() {
@@ -33,22 +35,22 @@ public String getUserId() {
    public void setSubTotal(String subTotal) {
 	   this.subTotal= subTotal;
    }
-   public String getItemId() {
+   public String[] getItemId() {
 	   return itemId;
    }
-   public void setItemId(String itemId) {
+   public void setItemId(String[] itemId) {
 	   this.itemId= itemId;
    }
-   public String getTotal() {
+   public String[] getTotal() {
 	   return total;
    }
-   public void setTotal(String total) {
+   public void setTotal(String[] total) {
 	  this.total= total;
    }
-   public String getQuantity() {
+   public String[] getQuantity() {
 	   return quantity;
    }
-   public void setQuantity(String quantity) {
+   public void setQuantity(String[] quantity) {
 	   this.quantity=quantity;
    }
 }

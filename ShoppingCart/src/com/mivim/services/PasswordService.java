@@ -17,7 +17,8 @@ public class PasswordService {
 	private static String email;
 	private static String userId;
 	private static String password;
-	public static void getPasswordService(PasswordDto passwordDto) throws SQLException {
+	public static boolean getPasswordService(PasswordDto passwordDto) throws SQLException {
+		boolean flag=false;
 		email=passwordDto.getEmail();
 		PasswordDto dto=PasswordDAo.getPasswordDAO(email);
 		
@@ -26,8 +27,9 @@ public class PasswordService {
 		email=dto.getEmail();
 		if(!dto.equals(null))
 		{
-			getMailService();
+			flag=getMailService();
 		}
+		return flag;
 		
 	}
 	

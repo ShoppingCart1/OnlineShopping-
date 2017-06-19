@@ -81,24 +81,12 @@ background-color:#ffffff;
 </head>
 <body>
         <div id="id1">
-
-<ul>
-  <li><a href="" class="active" target="main"><img src="Image/Home-Icon.png" border="0" height="12px"></a></li>
-  <li id="title">OnlineShopping</li>
-  
-  
-  
-  <ul style="float:right; list-style-type:none;">
-  	<li></li>
-    <li><a class="active"><dfn><%=name %></a></li>
-    <li><a href="">Logout</a></li>
-  </ul>
-</ul>
+<jsp:include page="adminHeader2.jsp"/>
    
-<iframe src="adminHome.jsp"  id="main" name="main" frameborder="0" ></iframe>
+<iframe src=""  id="main" name="main" frameborder="0" ></iframe>
   </div>
 <footer id="footerid"><h5> copy rights &#169 mivimtech.com</h5>
-<audio controls="controls" autoplay="true" style="background-color: transparent; opacity: 0.9; width: 47px; background-position: left;"src="titl.mp3" type="audio/mp3"></audio>
+
 </footer>
 <%}
 else

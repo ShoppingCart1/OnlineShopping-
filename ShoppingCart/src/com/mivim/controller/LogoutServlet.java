@@ -32,16 +32,10 @@ public class LogoutServlet extends HttpServlet {
 		response.setContentType("text/html");
 		PrintWriter out = response.getWriter();
 		
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		session.invalidate();
-		
-		/*String sessionAdmin = (String) session.getAttribute("adminName");
-		String sessionCustomer = (String) session.getAttribute("customerName");
-		
-		if((sessionAdmin.equals(null))&&(sessionCustomer.equals(null))){
-			out.println("Logged out");*/
-			
-			request.getRequestDispatcher("logout.jsp").forward(request, response);
+
+		request.getRequestDispatcher("logout.jsp").forward(request, response);
 			
 			
 		

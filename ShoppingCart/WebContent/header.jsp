@@ -15,13 +15,48 @@
   <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="icon" href="Image/logo-design.png" sizes="16x16">
 <title></title>
+<style type="text/css">
+@import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister');
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister');
+@import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister|Milonga');
+@import url('https://fonts.googleapis.com/css?family=Philosopher');
+#logout
+{
+	font-family: 'Love Ya Like A Sister', cursive;
+	font-family: 'Averia Libre', cursive;
+	font-size:20px;
+	
+}
+#name{
+		font-family: 'Love Ya Like A Sister', cursive;
+		font-family: 'Averia Libre', cursive;
+		font-family: 'Milonga', cursive;
+		font-size: 20px;
+		padding: 0px 20px 0px 0px;
+
+}
+#title{
+
+		font-family: 'Love Ya Like A Sister', cursive;
+		font-size	:30px;
+}
+	#title a:HOVER, a:ACTIVE
+	{
+		text-decoration: none;
+		color:white;
+	}
+	
+body{
+		
+	
+	}
+</style>
 </head>
 <body>
 <!-- navbar starts here -->
 <div class="w3-container w3-blue">
-    <a  href="Index.jsp" style="float:left;"><img src="Image/logo-design.png" alt=" " width="60" height="40">
-      </a>
-	<a href="Index.jsp"><span id="title">&nbsp;Online Shopping</span></a>
+    
+	<a href="index.jsp" id="title"><img src="Image/logo-design.png" alt=" " width="60" height="40">&nbsp;Online Shopping</a>
 	
 <%
 String s1=(String)session.getAttribute("customerName");
@@ -34,7 +69,7 @@ String s1=(String)session.getAttribute("customerName");
 	 Set<AddCartDto> listCartDto=(Set<AddCartDto>)session.getAttribute("addcart"); 
      int counter=0;
 %>
- <a href="/ShoppingCart/LogoutServlet" style="float:right;">&nbsp;&nbsp;<button class="btn btn-info btn-sm"  id="logout"> <span class="glyphicon glyphicon-user"></span>Logout</button></a>
+ <a href="/ShoppingCart/CustomerLogoutServlet" style="float:right;">&nbsp;&nbsp;<button class="btn btn-info btn-sm"  id="logout"> <span class="glyphicon glyphicon-user"></span>Logout</button></a>
  
           
 				 <li style="float:right;"><a id="cartitem" 

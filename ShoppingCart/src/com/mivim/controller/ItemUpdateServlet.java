@@ -83,7 +83,7 @@ public class ItemUpdateServlet extends HttpServlet {
 			
 			if(flag)
 			{
-				out.print("success");
+				request.getRequestDispatcher("adminHome.jsp").forward(request, response);
 			}
 			else
 			{

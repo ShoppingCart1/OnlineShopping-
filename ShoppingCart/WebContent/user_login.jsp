@@ -9,13 +9,24 @@
   
     <link rel="stylesheet" type="text/css" href="login.css"> 
 </head>
+<style>
+	body{
+		background-color: #66979b;
+		padding :0px 100px 0px 100px;
+	
+	}
 
+</style>
 <body>
- 
+ <jsp:include page="header.jsp"/>
  <div class="login-form">
+ 
+ <%String errorMessage=(String)request.getAttribute("errorMessage");
+     if(errorMessage!=null){ %>
+      <h3 style="color:red;"	><%= errorMessage %></h3>
+      <%} %>
   <form action="LoginServlet" method="post">
-     <h1>Customer Login</h1>
-   <!--    <h4 style="color: red"><%=request.getAttribute("errorMessage") %></h4> -->
+     <h1>Customer Login</h1> 
    <div>
    <input type="hidden"  name="loginmode" value="user">
    </div>
@@ -29,7 +40,7 @@
      <i class="fa fa-lock"></i>
   </div>
      <span class="alert">Invalid Credentials</span>
-     <a class="link" href="#">Lost your Password</a>
+     <a class="link" href="lostPassword.jsp">Lost your Password</a>
      <input type="hidden" value="customer" name="userRole">
      <input type="submit" value="Log in" class="log-btn"> 
      </form>

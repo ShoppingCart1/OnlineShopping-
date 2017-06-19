@@ -1,7 +1,8 @@
 package com.mivim.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.mivim.dto.OrderDto;
 import com.mivim.dto.OrderItemDto;
 import com.mivim.services.OrderItemService;
 
@@ -31,24 +33,62 @@ public class OrderItemServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-			
+			PrintWriter out =response.getWriter();
+		
 			HttpSession session=request.getSession();
 			String userId=(String)session.getAttribute("userId");
-			List<OrderItemDto> orderList=(List<OrderItemDto>) request.getAttribute("orders");
 			
-			 double sub =0;
-			for(OrderItemDto dto:orderList)
-			{
-				sub+=Double.parseDouble(dto.getTotal());
+			System.out.println(userId);
+			
+			OrderDto dto=new OrderDto();
+			
+			String itemId[]=request.getParameterValues("itemId");
+			String quantity[]=request.getParameterValues("quantity");
+			String totalPrice[]=request.getParameterValues("totalPrice");
+			
+			dto.setItemId(itemId);
+			dto.setQuantity(quantity);
+			dto.setTotal(totalPrice);
+			
+			double subTotal=0;
+			
+			for(String tp:totalPrice){
+				subTotal=subTotal+Double.parseDouble(tp);
 			}
+				System.out.println(subTotal);
+			
+			
+		
 			OrderItemDto orderDto=new OrderItemDto();
 			
-			orderDto.setSubTotal(sub);
+			orderDto.setSubTotal(subTotal);
 			orderDto.setUserId(userId);
 			
-			OrderItemService.getOrderService(orderDto,orderList);
+			try {
+				
+			
+				
+				boolean flag=OrderItemService.getOrderService(orderDto,dto);
+				System.out.println(flag);
+				if(flag)
+				{
+					System.out.println("abc");
+					session.removeAttribute("addcart");
+					request.getRequestDispatcher("DetailsFetchServlet").forward(request, response);
+				}
+				else
+				{
+					out.print("sorry");
+				}
 			
 			
+			} 
+			
+			
+			catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
 		
 	}
 

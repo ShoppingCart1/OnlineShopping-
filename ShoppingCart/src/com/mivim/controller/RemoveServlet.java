@@ -41,7 +41,7 @@ public class RemoveServlet extends HttpServlet {
 			
 			if(flag)
 			{
-				response.getWriter().println("success");
+				request.getRequestDispatcher("removeSuccess.jsp").forward(request, response);
 			}
 			else
 			{

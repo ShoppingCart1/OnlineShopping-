@@ -14,7 +14,7 @@ public class OrderItemDto implements Serializable {
 	private String userId=null;
 	private double subTotal;
 	private String total=null;
-	private String	quantiy=null;
+	private String	quantity=null;
 	public String getItemId() {
 		return itemId;
 	}
@@ -40,10 +40,10 @@ public class OrderItemDto implements Serializable {
 		this.total = total;
 	}
 	public String getQuantiy() {
-		return quantiy;
+		return quantity;
 	}
-	public void setQuantiy(String quantiy) {
-		this.quantiy = quantiy;
+	public void setQuantity(String quantity) {
+		this.quantity = quantity;
 	}
 	
 	

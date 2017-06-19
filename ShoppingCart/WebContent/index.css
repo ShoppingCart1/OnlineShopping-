@@ -3,17 +3,22 @@
 @import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister|Milonga');
 
  .itemView a:link, a:visited {
-    background-color: blue;
+    background-color: #568be2;
     color: white;
     padding: 14px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
+    border-radius: 8px;
 }
 
 
  .itemView a:hover, a:active {
-    background-color: red;
+    background-color: #1970ff;
+    color: white;
+}
+a{
+	text-decoration: none;
 }
 .itemView
 {

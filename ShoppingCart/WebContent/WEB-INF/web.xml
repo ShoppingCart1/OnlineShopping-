@@ -8,15 +8,22 @@
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
-    <welcome-file>Home.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-    <servlet-name>adminHome</servlet-name>
-    <jsp-file>/adminHome.jsp</jsp-file>
+    <servlet-name>ProductViewServlet</servlet-name>
+    <servlet-class>com.mivim.controller.ProductViewServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>adminHome</servlet-name>
-    <url-pattern>/adminHome</url-pattern>
+    <servlet-name>ProductViewServlet</servlet-name>
+    <url-pattern>/ProductViewServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>adminlogin</servlet-name>
+    <jsp-file>/adminlogin.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>adminlogin</servlet-name>
+    <url-pattern>/admin</url-pattern>
   </servlet-mapping>
   <servlet>
     <servlet-name>LostPasswordServlet</servlet-name>
@@ -115,18 +122,6 @@
     <url-pattern>/ItemViewServlet</url-pattern>
   </servlet-mapping>
   <servlet>
-    <description></description>
-    <display-name>IndexServlet</display-name>
-    <servlet-name>IndexServlet</servlet-name>
-    <servlet-class>com.mivim.controller.IndexServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>IndexServlet</servlet-name>
-    <url-pattern>/IndexServlet</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>LogoutServlet</display-name>
     <servlet-name>LogoutServlet</servlet-name>
     <servlet-class>com.mivim.controller.LogoutServlet</servlet-class>
   </servlet>
@@ -136,12 +131,38 @@
   </servlet-mapping>
   <servlet>
     <description></description>
-    <display-name>ProductViewServlet</display-name>
-    <servlet-name>ProductViewServlet</servlet-name>
-    <servlet-class>com.mivim.controller.ProductViewServlet</servlet-class>
+    <display-name>OrderItemServlet</display-name>
+    <servlet-name>OrderItemServlet</servlet-name>
+    <servlet-class>com.mivim.controller.OrderItemServlet</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ProductViewServlet</servlet-name>
-    <url-pattern>/ProductViewServlet</url-pattern>
+    <servlet-name>OrderItemServlet</servlet-name>
+    <url-pattern>/OrderItemServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>AddressServlet</servlet-name>
+    <servlet-class>com.mivim.controller.AddressServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddressServlet</servlet-name>
+    <url-pattern>/AddressServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>DetailsFetchServlet</servlet-name>
+    <servlet-class>com.mivim.controller.DetailsFetchServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DetailsFetchServlet</servlet-name>
+    <url-pattern>/DetailsFetchServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>CustomerLogoutServlet</display-name>
+    <servlet-name>CustomerLogoutServlet</servlet-name>
+    <servlet-class>com.mivim.controller.CustomerLogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomerLogoutServlet</servlet-name>
+    <url-pattern>/CustomerLogoutServlet</url-pattern>
   </servlet-mapping>
 </web-app>

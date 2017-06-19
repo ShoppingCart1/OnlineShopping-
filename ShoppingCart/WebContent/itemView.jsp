@@ -106,7 +106,7 @@ body{
  	  </tr>
  	  <tr>
  	  		<td><p><a href="/ShoppingCart/UtilUpdateForm?itemId=<%=itemId %>">Update Item</a></p></td>
- 	  		<td><p style="float:right;"><a href="/ShoppingCart/UtilUpdateForm?itemId=<%=itemId %>" disabled>Remove Item</a></p></td>
+ 	  		<td><p style="float:right;"><a href="/ShoppingCart/RemoveServlet?itemId=<%=itemId %>" class="confirmation">Remove Item</a></p></td>
  	  </tr>
  	 
  	 </table>
@@ -117,5 +117,14 @@ body{
     	response.sendRedirect("adminlogin.jsp");
     }
     %>
+    <script type="text/javascript">
+    var elems = document.getElementsByClassName('confirmation');
+    var confirmIt = function (e) {
+        if (!confirm('Are you sure?')) e.preventDefault();
+    };
+    for (var i = 0, l = elems.length; i < l; i++) {
+        elems[i].addEventListener('click', confirmIt, false);
+    }
+</script>
 </body>
 </html>

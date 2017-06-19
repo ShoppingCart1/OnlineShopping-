@@ -7,15 +7,20 @@
   <title>Admin_Login</title>
   <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css'>
   
-    <link rel="stylesheet" type="text/css" href="adminlogin.css"> 
+    <link rel="stylesheet" type="text/css" href="login.css"> 
 </head>
 
 <body>
  
  <div class="login-form">
+ <%String errorMessage=(String)request.getAttribute("errorMessage");
+     if(errorMessage!=null){ %>
+      <h3 style="color:red;"	><%= errorMessage %></h3>
+      <%} %>
   <form action="LoginServlet" method="post">
+    
      <h1>Admin Login</h1>
-   <!--    <h4 style="color: red"><%=request.getAttribute("errormessage") %></h4> -->
+   
    <div>
    <input type="hidden"  name="loginmode" value="admin">
    </div>
@@ -30,12 +35,12 @@
   </div>
 
      <span class="alert">Invalid Credentials</span>
-     <a class="link" href="#">Forgot Password</a>
+     <a class="link" href="lostPassword.jsp">Forgot Password</a>
      
      <input type="hidden" value="admin" name="userRole">
      <input type="submit" value="Log in" class="log-btn"> 
      </form>
-    <!--    <h3><%= request.getAttribute("errormessage") %></h3> -->
+     
  </div>
 </body>
 </html>

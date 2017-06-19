@@ -58,6 +58,7 @@ public class LoginDAO {
 			name = resultSet.getString("username");
 			role = resultSet.getString("role");
 			userId=resultSet.getString("userId");
+			System.out.println(userId);
 			dto.setUsername(name);
 			dto.setRole(role);
 			dto.setUserId(userId);

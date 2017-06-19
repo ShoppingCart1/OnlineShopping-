@@ -43,6 +43,8 @@ public class AddCartServlet extends HttpServlet {
 
 		
 		HttpSession session = request.getSession();
+		String customerName=(String)session.getAttribute("customerName");
+		if(customerName!=null){
 		String itemId = request.getParameter("itemId");
 		String itemName = request.getParameter("itemName");
 		String itemDescription = request.getParameter("itemDescription");
@@ -66,7 +68,11 @@ public class AddCartServlet extends HttpServlet {
 		session.setAttribute("addcart", addCartDtos);
 
 		request.getRequestDispatcher("CartItems.jsp").forward(request, response);
-
+		}
+		else
+		{
+			response.sendRedirect("user_login.jsp");
+		}
 	}
 
 }

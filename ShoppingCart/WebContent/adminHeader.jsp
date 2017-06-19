@@ -9,7 +9,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Header</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <style type="text/css">
 		
 @import url('https://fonts.googleapis.com/css?family=Love+Ya+Like+A+Sister');
@@ -30,6 +31,15 @@
 		font-size: 20px;
 		padding: 0px 20px 0px 0px;
 
+}
+#title{
+
+		font-family: 'Love Ya Like A Sister', cursive;
+		font-size	:30px;
+}
+body{
+		padding:0px 100px 0px 100px;
+		
 }
 </style>
 </head>

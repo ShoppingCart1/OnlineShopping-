@@ -17,8 +17,16 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	
 	<link rel="stylesheet" type="text/css" href="adminForm.css">
+	<style>
+		body{
+		padding:0px 100px 0px 100px;
+		background-color: #f4f4f4;
+}
+	
+	</style>
 </head>
 <body>
+	<jsp:include page="adminHeader.jsp"/>
 	<div class="form-style">
 	<fieldset>
 	<legend>Add Item Page</legend>

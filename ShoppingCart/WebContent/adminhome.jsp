@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ page import="java.util.List,com.mivim.dto.ItemDto"%>
+    <%@ page import="java.util.List,com.mivim.dto.ItemDto,com.mivim.dao.LoginDAO"%>
     
     <%String adminName=(String)session.getAttribute("adminName");
     if(adminName!=null)
     	{%>
-   <%List<ItemDto> listDto=(List<ItemDto>)request.getAttribute("itemDetails"); %> 
+   <%
+     List<ItemDto> listDto=LoginDAO.getItemDetailsDAO();%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -19,18 +20,7 @@
 @import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister');
 @import url('https://fonts.googleapis.com/css?family=Averia+Libre|Love+Ya+Like+A+Sister|Milonga');
 
-a:link, a:visited {
-    background-color: #6098f2;
-    color: white;
-    padding: 14px 25px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-}
 
- a:hover, a:active {
-    background-color: #1a6cef;
-}
 .itemView
 {
 	
@@ -73,9 +63,23 @@ a:link, a:visited {
 		padding: 0px 20px 0px 0px;
 
 }
+.bottomright {
+    position: fixed;
+    width: 100px;
+    height: 150px;
+    bottom: 3px;
+    right: 100px;
+    padding-right: 56px;
+    font-size: 18px;
+    z-index: 999;	
+    
+   
+    
+}
 
 body{
 		padding:0px 100px 0px 100px;
+		
 }
 
 </style>
@@ -101,7 +105,11 @@ body{
    </table>
 </div>
 <%} %>
+ <div class="bottomright">
+ <a href="AddItem.jsp"><img alt="Image/addItem1.png" src="Image/addItem.png"/></a>
+ </div>
 
+ 
 <%}
     else
     {
